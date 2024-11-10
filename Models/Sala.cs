@@ -18,13 +18,14 @@ public class Sala
 
 
 
-    public Sala(int id, string nombre, int capacidad, List<Horario> horarios, List<Dia> dias)
+    public Sala(int id, string nombre, int capacidad, List<Horario> horarios, List<Dia> dias, List<Asiento> asientos)
     {
         Id = id;
         Nombre = nombre;
         Capacidad = capacidad;
         Horarios = horarios ?? new List<Horario>(); // usamos ?? para que nunca se inicialicen null y explote.
         Dia = dias ?? new List<Dia>();
+        Asientos = asientos ?? new List<Asiento>();
     }
    
 }
