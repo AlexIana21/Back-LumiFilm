@@ -1,7 +1,9 @@
 namespace Models;
 
 public class Ticket {
-    public static int Id {get; private set;} = 1;
+
+    private static int contadorId = 1;
+    public int Id {get; private set;}
 
     private List<(Entrada entrada, int cantidad)> entradas;
 
@@ -20,7 +22,7 @@ public class Ticket {
     public static int TotalTickets {get; private set;}
 
     public Ticket() {
-        Id++;
+        Id = contadorId++;
         entradas = new List<(Entrada entrada, int cantidad)>();
         FechaTicket = DateTime.Now;
         TotalTickets++;
