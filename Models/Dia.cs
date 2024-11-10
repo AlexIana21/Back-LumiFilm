@@ -1,3 +1,5 @@
+namespace Models;
+
 public class Dia
 {
     public int Id { get; set; }

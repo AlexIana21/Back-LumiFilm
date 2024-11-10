@@ -1,3 +1,5 @@
+namespace Models;
+
 public class Horario
 {
     public int Id { get; set; }

@@ -13,6 +13,10 @@ public class Sala
     // Relación con días.
     public List<Dia> Dia { get; set; } = new List<Dia>();
 
+     // Relación con asientos para poder tener el ID de la sala.
+    public List<Asiento> Asientos { get; set; } = new List<Asiento>();
+
+
 
     public Sala(int id, string nombre, int capacidad, List<Horario> horarios, List<Dia> dias)
     {
