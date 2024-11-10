@@ -4,8 +4,7 @@ namespace Models;
 public class Sala
 {
     public int Id {get; set;}
-    public string Nombre {get; set;}
-    protected int Capacidad {get; set;}
+    public int Capacidad {get; set;}
 
     // Relación con horarios.
      public List<Horario> Horarios { get; set; } = new List<Horario>();
@@ -16,16 +15,39 @@ public class Sala
      // Relación con asientos para poder tener el ID de la sala.
     public List<Asiento> Asientos { get; set; } = new List<Asiento>();
 
-
-
-    public Sala(int id, string nombre, int capacidad, List<Horario> horarios, List<Dia> dias, List<Asiento> asientos)
+    public Sala(int id, int capacidad)
+{
+    if (capacidad > 90)
     {
-        Id = id;
-        Nombre = nombre;
-        Capacidad = capacidad;
-        Horarios = horarios ?? new List<Horario>(); // usamos ?? para que nunca se inicialicen null y explote.
-        Dia = dias ?? new List<Dia>();
-        Asientos = asientos ?? new List<Asiento>();
+        throw new ArgumentException("La capacidad no puede exceder 90 asientos.");
     }
+
+    Id = id;
+    Capacidad = capacidad;
+
    
+    int columnas = 10; 
+    int filas = (int)Math.Ceiling(capacidad / (double)columnas); // sacar filas
+
+    //ejemplo de anton X e Y adaptado 
+
+    for (int fila = 0; fila < filas; fila++) 
+    {
+        for (int columna = 1; columna <= columnas; columna++) 
+        {
+            int asientoNumero = fila * columnas + columna; // Calcular el número de asiento
+            if (asientoNumero > capacidad) break; 
+            Asientos.Add(new Asiento
+            {
+                Columna = columna,
+                Fila = (char)('A' + fila), 
+                Ocupado = false,
+                SalaId = id
+            });
+        }
+    }
+}
+
+    
+    public Sala() { }
 }
