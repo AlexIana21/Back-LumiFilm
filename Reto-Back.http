@@ -1,0 +1,6 @@
+@Reto_Back_HostAddress = http://localhost:5163
+
+GET {{Reto_Back_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
