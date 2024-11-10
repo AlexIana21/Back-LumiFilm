@@ -28,7 +28,7 @@ namespace Reto_Back.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Pelicula> CreatePlato(Pelicula pelicula)
+        public ActionResult<Pelicula> CreatePelicula(Pelicula pelicula)
         {
            peliculas.Add(pelicula);
            return CreatedAtAction(nameof(GetPelicula), new { id = pelicula.Id }, pelicula);
