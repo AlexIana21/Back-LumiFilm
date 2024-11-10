@@ -1,3 +1,6 @@
+using Models;
+using Reto_Back.Controllers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,5 +24,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+PeliculaController.InicializarDatos();
 
 app.Run();
