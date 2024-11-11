@@ -5,9 +5,9 @@ public class Ticket {
     public int Id {get; private set;}
     public Pelicula Pelicula {get; set;}
     public Sala Sala {get; set;}
-    public List<Asiento> AsientosReservados { get; private set; }
-    private List<(Entrada entrada, int cantidad)> entradas;
-    public DateTime FechaTicket {get; private set;}
+    public List<Asiento> AsientosReservados { get; /*protected*/ set; }
+    /*private*/ public List<(Entrada entrada, int cantidad)> entradas;
+    public DateTime FechaTicket {get; /*protected*/ set;}
     public double Total {
         get {
             double totalPedido = 0;

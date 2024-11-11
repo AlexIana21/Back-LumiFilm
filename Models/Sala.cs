@@ -19,7 +19,7 @@ public class Sala
 {
     if (capacidad > 90)
     {
-        throw new ArgumentException("La capacidad no puede exceder 90 asientos.");
+        throw new ArgumentException("La capacidad no puede exceder 90 asientos."); // try-catch
     }
 
     Id = id;
