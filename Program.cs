@@ -1,3 +1,4 @@
+using CineAPI.Controllers;
 using Models;
 using Reto_Back.Controllers;
 
@@ -26,7 +27,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-PeliculaController.InicializarDatos();
+
 EntradaController.InicializarDatos();
+PeliculaController.InicializarDatos();
+var peliculas = PeliculaController.GetPeliculasList();
+SalaController.InicializarDatos(peliculas); 
 
 app.Run();

@@ -4,9 +4,9 @@ public class Horario
 {
     public int Id { get; set; }
     public DateTime Hora { get; set; }
-    public string Pelicula { get; set; }
+    public Pelicula Pelicula { get; set; }
 
-    public Horario(int id, DateTime hora, string pelicula)
+    public Horario(int id, DateTime hora, Pelicula pelicula)
     {
         Id = id;
         Hora = hora;

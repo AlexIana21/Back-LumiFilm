@@ -48,5 +48,15 @@ public class Sala
             }
         }
     }
+
+    public Sala(int capacidad, List<Horario> horarios, List<Dia> dias, List<Asiento> asientos)
+    {
+        Id = counterId++;
+        Capacidad = capacidad;
+        Horarios = horarios ?? new List<Horario>();
+        Dia = dias ?? new List<Dia>();
+        Asientos = asientos ?? new List<Asiento>();
+    }
+    
     public Sala() { }
 }

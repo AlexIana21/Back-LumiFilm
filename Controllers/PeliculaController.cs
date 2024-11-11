@@ -74,5 +74,10 @@ namespace Reto_Back.Controllers
             peliculas.Add(new Pelicula("Emilia Pérez", "Sobrecualificada e infravalorada, Rita es una abogada de un gran bufete que un día recibe una oferta inesperada: ayudar al temido jefe de un cartel a retirarse de su negocio y desaparecer para siempre convirtiéndose en la mujer que él siempre ha soñado ser.", 130, 16, "Drama", "Jacques Audiard"));
             peliculas.Add(new Pelicula("Robot Salvaje", "La robot Roz, que ha naufragado en una isla deshabitada, debe aprender a adaptarse al duro entorno, forjando poco a poco relaciones con la fauna local y convirtiéndose en madre adoptiva de una cría de ganso huérfana.", 102, 0, "Animación", "Chris Sanders"));
         }
+
+        public static List<Pelicula> GetPeliculasList()
+        {
+        return peliculas;
+        }
     }
 }
