@@ -121,47 +121,37 @@ namespace CineAPI.Controllers
             return CreatedAtAction(nameof(GetDias), new { id = sala.Id }, dia);
         }
 
+        public static void InicializarDatos(List<Pelicula> peliculas)
+        {
+            
+            var lunes = new Dia(1, "Lunes");
+            var martes = new Dia(2, "Martes");
+            var miercoles = new Dia(3, "Miércoles");
+            var jueves = new Dia(4, "Jueves");
+            var viernes = new Dia(5, "Viernes");
+            var sabado = new Dia(6, "Sábado");
+            var domingo = new Dia(7, "Domingo");
+           
 
-        public static void InicializarDatos(List<Pelicula> peliculas) {
-
-            // CREAR HORAIOS
             var horariosSala1 = new List<Horario>
             {
-                new Horario(1, DateTime.Now.AddHours(1), peliculas[1]), 
-                new Horario(2, DateTime.Now.AddHours(4), peliculas[1])  
+                new Horario(1, new DateTime(2024, 11, 14, 14, 30, 0), peliculas[0], lunes),
+                new Horario(2, new DateTime(2024, 11, 14, 16, 30, 0), peliculas[0], martes),  
+                new Horario(3, new DateTime(2024, 11, 14, 20, 30, 0), peliculas[0], jueves)  
+
             };
 
-            var horariosSala2 = new List<Horario>
+            salas.Add(new Sala(1, 9)
             {
-                new Horario(3, DateTime.Now.AddHours(2), peliculas[2]),
-                new Horario(4, DateTime.Now.AddHours(5), peliculas[2])  
-            };
-
-            // CREAR DIAS 
-           var diasSala1 = new List<Dia>{
-                new Dia(1, "Lunes"),
-                new Dia(2, "Miércoles"),
-                new Dia(4, "Viernes")
-            };
-
-            var diasSala2 = new List<Dia> {
-                new Dia(2, "Martes"),
-                new Dia(3, "Jueves"),
-                new Dia(6, "Sábado")
-            };
-
-            //CREAR SALA
-            salas.Add(new Sala(1, 90)
-            {
-                Horarios = horariosSala1,
-                Dia = diasSala1
-            });
-
-            salas.Add(new Sala(2, 90)
-            {
-                Horarios = horariosSala2,
-                Dia = diasSala2
+                Horarios = horariosSala1
             });
         }
+
+        public static List<Sala> GetSalasList() // esto es para los asientos
+        {
+            return salas;
+        }
+
     }
 }
+

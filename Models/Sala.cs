@@ -4,9 +4,9 @@ namespace Models;
 public class Sala
 {
     private static int counterId = 1;
-    public int Id {get; set;}
-    public int Capacidad {get; set;}
-
+    public int Id { get; set; }
+    public int Capacidad { get; set; } 
+  
     // Relación con horarios.
     public List<Horario> Horarios { get; set; } = new List<Horario>();
 
@@ -18,16 +18,16 @@ public class Sala
 
     public Sala(int id, int capacidad)
     {
-        if (capacidad > 90)
+        if (capacidad > 10)
         {
-            throw new ArgumentException("La capacidad no puede exceder 90 asientos."); // try-catch
+            throw new ArgumentException("La capacidad no puede exceder 10 asientos."); // try-catch
         }
 
         Id = counterId++;
         Capacidad = capacidad;
 
    
-        int columnas = 10; 
+        int columnas = 3; 
         int filas = (int)Math.Ceiling(capacidad / (double)columnas); // sacar filas
 
         //ejemplo de anton X e Y adaptado 
@@ -58,5 +58,6 @@ public class Sala
         Asientos = asientos ?? new List<Asiento>();
     }
     
+
     public Sala() { }
 }
