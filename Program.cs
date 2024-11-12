@@ -3,6 +3,21 @@ using Reto_Back.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins(
+            "https://localhost:7024/api",
+            "http://127.0.0.1:5500")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
+
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -19,6 +34,8 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
