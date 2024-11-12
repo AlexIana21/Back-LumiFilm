@@ -48,6 +48,7 @@ namespace Reto_Back.Controllers
             pelicula.Clasificacion = updatePelicula.Clasificacion;
             pelicula.Genero = updatePelicula.Genero;
             pelicula.Direccion = updatePelicula.Direccion;
+            pelicula.Imagen = updatePelicula.Imagen;
             return NoContent();
         }
 
@@ -65,7 +66,8 @@ namespace Reto_Back.Controllers
 
         public static void InicializarDatos()
         {
-            peliculas.Add(new Pelicula("Speal No Evil", "Una familia danesa visita a una familia holandesa que conocieron en unas vacaciones. Lo que se suponía que iba a ser un fin de semana idílico comienza a desmoronarse lentamente mientras los daneses intentan ser educados ante lo desagradables que empiezan a ser los neerlandeses.", 109, 16, "Thriller", "James Watkins"));
+            peliculas.Add(new Pelicula("Speal No Evil", "Una familia danesa visita a una familia holandesa que conocieron en unas vacaciones. Lo que se suponía que iba a ser un fin de semana idílico comienza a desmoronarse lentamente mientras los daneses intentan ser educados ante lo desagradables que empiezan a ser los neerlandeses.", 109, 16, "Thriller", "James Watkins", "speak.webp"));
+            /*
             peliculas.Add(new Pelicula("Buffalo Kids", "Tom y Mary, dos hermanos huérfanos, desembarcan en Nueva York a finales del siglo XIX. Para reunirse con su tío, se aventuran como polizones en un tren por el Salvaje Oeste donde conocerán a Nick, un nuevo y extraordinario amigo que cambiará sus vidas para siempre. Juntos se embarcarán en un peligroso viaje, enfrentándose a malvados villanos, haciendo inesperados amigos y viviendo situaciones únicas.",93, 0, "Animación", "Pedro Solís"));
             peliculas.Add(new Pelicula("Elevation", "Un padre soltero y dos mujeres se aventuran desde la seguridad de sus hogares a enfrentarse a criaturas monstruosas para salvar la vida de un niño.", 90, 16, "Acción", "George Nolfi"));
             peliculas.Add(new Pelicula("El Cuervo", "Eric Draven y Shelly Webster son asesinados de forma brutal cuando los demonios de su tormentoso pasado los alcanzan. Al recibir la oportunidad de sacrificarse para salvar a su gran amor, Eric decide vengarse sin piedad de sus asesinos, cruzando entre el mundo de los vivos y los muertos para ajustar cuentas.", 111, 18, "Acción", "Rupert Sanders"));
@@ -73,6 +75,7 @@ namespace Reto_Back.Controllers
             peliculas.Add(new Pelicula("Dune: Part II", "Tras los sucesos de la primera parte acontecidos en el planeta Arrakis, el joven Paul Atreides se une a la tribu de los Fremen y comienza un viaje espiritual y marcial para convertirse en mesías, mientras intenta evitar el horrible pero inevitable futuro que ha presenciado: una Guerra Santa en su nombre, que se extiende por todo el universo conocido.", 166, 12, "Ciencia Ficción", "Denis Villeneuve"));
             peliculas.Add(new Pelicula("Emilia Pérez", "Sobrecualificada e infravalorada, Rita es una abogada de un gran bufete que un día recibe una oferta inesperada: ayudar al temido jefe de un cartel a retirarse de su negocio y desaparecer para siempre convirtiéndose en la mujer que él siempre ha soñado ser.", 130, 16, "Drama", "Jacques Audiard"));
             peliculas.Add(new Pelicula("Robot Salvaje", "La robot Roz, que ha naufragado en una isla deshabitada, debe aprender a adaptarse al duro entorno, forjando poco a poco relaciones con la fauna local y convirtiéndose en madre adoptiva de una cría de ganso huérfana.", 102, 0, "Animación", "Chris Sanders"));
+            */
         }
 
         public static List<Pelicula> GetPeliculasList()

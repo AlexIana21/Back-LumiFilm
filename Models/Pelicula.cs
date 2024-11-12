@@ -10,7 +10,9 @@ public class Pelicula {
     public string Genero {get;set;}
     public string Direccion {get; set;}
 
-    public Pelicula(string titulo, string sinopsis, int duracion, int clasificacion, string genero, string direccion) {
+    public string Imagen {get; set;}
+
+    public Pelicula(string titulo, string sinopsis, int duracion, int clasificacion, string genero, string direccion, string imagen) {
         Id = contadorId++;
         Titulo = titulo;
         Sinopsis = sinopsis;
@@ -18,6 +20,7 @@ public class Pelicula {
         Clasificacion = clasificacion;
         Genero = genero;
         Direccion = direccion;
+        Imagen = imagen;
     }
 
 }
