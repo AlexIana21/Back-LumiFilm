@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
-namespace CineAPI.Controllers
+namespace Reto_Back.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
