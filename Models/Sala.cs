@@ -6,12 +6,8 @@ public class Sala
     private static int counterId = 1;
     public int Id { get; set; }
     public int Capacidad { get; set; } 
-  
-    // Relación con horarios.
-    public List<Horario> Horarios { get; set; } = new List<Horario>();
 
-    // Relación con días.
-    public List<Dia> Dia { get; set; } = new List<Dia>();
+    public List<Sesion> Sesion {get; set;} = new List<Sesion>();
 
      // Relación con asientos para poder tener el ID de la sala.
     public List<Asiento> Asientos { get; set; } = new List<Asiento>();
@@ -41,23 +37,13 @@ public class Sala
                 Asientos.Add(new Asiento
                 {
                     Columna = columna,
-                    Fila = (char)('A' + fila), 
+                    Fila = "A", 
                     Ocupado = false,
                     SalaId = id
                 });
             }
         }
     }
-
-    public Sala(int capacidad, List<Horario> horarios, List<Dia> dias, List<Asiento> asientos)
-    {
-        Id = counterId++;
-        Capacidad = capacidad;
-        Horarios = horarios ?? new List<Horario>();
-        Dia = dias ?? new List<Dia>();
-        Asientos = asientos ?? new List<Asiento>();
-    }
-    
 
     public Sala() { }
 }

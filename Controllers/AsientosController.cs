@@ -22,7 +22,7 @@ namespace Reto_Back.Controllers
         }
 
         [HttpPut("{salaId}/{fila}/{columna}/reservar")]
-        public IActionResult ReservarAsiento(int salaId, char fila, int columna)
+        public IActionResult ReservarAsiento(int salaId, string fila, int columna)
         {
             var sala = salas.FirstOrDefault(s => s.Id == salaId);
             if (sala == null)
@@ -33,16 +33,18 @@ namespace Reto_Back.Controllers
             var asiento = sala.Asientos.FirstOrDefault(a => a.Fila == fila && a.Columna == columna);
             if (asiento == null)
             {
-                return NotFound($"Asiento {fila}{columna} no encontrado en la sala {salaId}.");
+                return NotFound($"Asiento en la fila {fila} y columna {columna} no encontrado en la sala {salaId}.");
             }
 
+            
             if (asiento.Ocupado)
             {
-                return Conflict($"El asiento {fila}{columna} ya está reservado.");
+                return Conflict($"El asiento en la fila {fila} y columna {columna} ya está reservado.");
             }
 
+            // Reservar 
             asiento.Ocupado = true;
-            return Ok($"Asiento {fila}{columna} reservado exitosamente.");
+            return Ok($"Asiento en la fila {fila} y columna {columna} reservado exitosamente.");
         }
     }
 }
