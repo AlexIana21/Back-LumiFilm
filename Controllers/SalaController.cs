@@ -58,9 +58,9 @@ namespace Reto_Back.Controllers
         {
             var sesionesSala1 = new List<Sesion>
             {
-                new Sesion(1, "Lunes", new DateTime(2024, 11, 14, 14, 30, 0), peliculas[0]),
-                new Sesion(2, "Martes", new DateTime(2024, 11, 14, 16, 30, 0), peliculas[0]),
-                new Sesion(3, "Viernes", new DateTime(2024, 11, 14, 20, 30, 0), peliculas[0])
+                new Sesion( "Lunes", new DateTime(2024, 11, 14, 14, 30, 0), peliculas[0]),
+                new Sesion( "Martes", new DateTime(2024, 11, 14, 16, 30, 0), peliculas[0]),
+                new Sesion( "Viernes", new DateTime(2024, 11, 14, 20, 30, 0), peliculas[0])
             };
 
             salas.Add(new Sala(1, 9) 
