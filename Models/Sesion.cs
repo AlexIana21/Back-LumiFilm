@@ -4,12 +4,12 @@ public class Sesion
 {
     private static int contadorId = 1;
     public int Id { get; private set; }
-    public string Dia { get; set; } 
-    public DateTime Hora { get; set; }
+    public DateOnly Dia { get; set; } 
+    public TimeOnly Hora { get; set; }
     public Pelicula Pelicula { get; set; } 
     public List<Asiento> Asientos { get; set; } = new List<Asiento>();
 
-    public Sesion(string dia, DateTime hora, Pelicula pelicula, int capacidad)
+    public Sesion(DateOnly dia, TimeOnly hora, Pelicula pelicula, int capacidad)
     {
         if (capacidad > 10)
         {
@@ -46,6 +46,4 @@ public class Sesion
             }
         }
     }
-
-    public Sesion() { }
 }

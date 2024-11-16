@@ -46,6 +46,7 @@ app.MapControllers();
 
 EntradaController.InicializarDatos();
 PeliculaController.InicializarDatos();
+SesionController.InicializarDatos();
 
 
 app.Run();
