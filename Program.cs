@@ -46,7 +46,6 @@ app.MapControllers();
 
 EntradaController.InicializarDatos();
 PeliculaController.InicializarDatos();
-var peliculas = PeliculaController.GetPeliculasList();
-SalaController.InicializarDatos(peliculas); 
+
 
 app.Run();

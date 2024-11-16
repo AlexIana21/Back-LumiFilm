@@ -34,7 +34,7 @@ namespace Reto_Back.Controllers
                 return Conflict($"Ya existe una sala con el ID {sala.Id}.");
             }
 
-            var nuevaSala = new Sala(sala.Id, sala.Capacidad);
+            var nuevaSala = new Sala(sala.Id, sala.Capacidad, sala.Sesion);
             salas.Add(nuevaSala);
 
             return CreatedAtAction(nameof(GetSala), new { id = nuevaSala.Id }, nuevaSala);
@@ -53,21 +53,6 @@ namespace Reto_Back.Controllers
             return NoContent();
         }
 
-
-           public static void InicializarDatos(List<Pelicula> peliculas)
-        {
-            var sesionesSala1 = new List<Sesion>
-            {
-                new Sesion( "Lunes", new DateTime(2024, 11, 14, 14, 30, 0), peliculas[0]),
-                new Sesion( "Martes", new DateTime(2024, 11, 14, 16, 30, 0), peliculas[0]),
-                new Sesion( "Viernes", new DateTime(2024, 11, 14, 20, 30, 0), peliculas[0])
-            };
-
-            salas.Add(new Sala(1, 9) 
-            {
-                Sesion = sesionesSala1
-            });
-        }
 
         public static List<Sala> GetSalasList() // esto es para los asientos
         {
