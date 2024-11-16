@@ -16,15 +16,12 @@ builder.Services.AddCors(options =>
         });
 });
 
-
-
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 var app = builder.Build();
 
@@ -43,10 +40,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
 EntradaController.InicializarDatos();
 PeliculaController.InicializarDatos();
+SalaController.InicializarDatos();
 SesionController.InicializarDatos();
-
 
 app.Run();

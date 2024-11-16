@@ -34,7 +34,7 @@ namespace Reto_Back.Controllers
                 return Conflict($"Ya existe una sala con el ID {sala.Id}.");
             }
 
-            var nuevaSala = new Sala(sala.Id, sala.Capacidad, sala.Sesion);
+            var nuevaSala = new Sala();
             salas.Add(nuevaSala);
 
             return CreatedAtAction(nameof(GetSala), new { id = nuevaSala.Id }, nuevaSala);
@@ -53,8 +53,23 @@ namespace Reto_Back.Controllers
             return NoContent();
         }
 
+        public static void InicializarDatos()    
+        {
+            if (salas.Count == 0) 
+            {
+                for (int i = 1; i <= 8; i++)
+                {
+                    salas.Add(new Sala());
+                    Console.WriteLine($"Sala {i} creada."); 
+                }
+            }
+            else
+            {
+                Console.WriteLine("Las salas ya estaban inicializadas.");
+            }
+        }
 
-        public static List<Sala> GetSalasList() // esto es para los asientos
+        public static List<Sala> GetSalasList() 
         {
             return salas;
         }

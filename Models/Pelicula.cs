@@ -9,7 +9,6 @@ public class Pelicula {
     public int Clasificacion {get;set;}
     public string Genero {get;set;}
     public string Direccion {get; set;}
-
     public string Imagen {get; set;}
 
     public Pelicula(string titulo, string sinopsis, int duracion, int clasificacion, string genero, string direccion, string imagen) {

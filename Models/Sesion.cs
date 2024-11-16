@@ -7,9 +7,10 @@ public class Sesion
     public DateOnly Dia { get; set; } 
     public TimeOnly Hora { get; set; }
     public Pelicula Pelicula { get; set; } 
+    public Sala Sala { get; set; }
     public List<Asiento> Asientos { get; set; } = new List<Asiento>();
 
-    public Sesion(DateOnly dia, TimeOnly hora, Pelicula pelicula, int capacidad)
+    public Sesion(DateOnly dia, TimeOnly hora, Pelicula pelicula, Sala sala, int capacidad)
     {
         if (capacidad > 10)
         {
@@ -20,30 +21,34 @@ public class Sesion
         Dia = dia;
         Hora = hora;
         Pelicula = pelicula;
-
+        Sala = sala;
         GenerarAsientos(capacidad);
     }
 
     private void GenerarAsientos(int capacidad)
     {
-        int columnas = 3; 
-        int filas = (int)Math.Ceiling(capacidad / (double)columnas);
+        int columnas = 10; 
+        int filas = (int)Math.Ceiling((double)capacidad / columnas);
 
-        for (int fila = 0; fila < filas; fila++)
+        for (int x = 0; x < filas; x++) 
         {
-            for (int columna = 1; columna <= columnas; columna++)
+            string filaActual = ((char)('A' + x)).ToString(); 
+
+            for (int y = 1; y <= columnas; y++)
             {
-                int asientoNumero = fila * columnas + columna;
-                if (asientoNumero > capacidad) break;
+                if (Asientos.Count >= capacidad)
+                {
+                    break;
+                }
 
                 Asientos.Add(new Asiento
                 {
-                    Columna = columna,
-                    Fila = "A" + fila, 
-                    Ocupado = false,
-                    SalaId = Id 
+                    Fila = filaActual, 
+                    Columna = columnas,
+                    Ocupado = false
                 });
             }
         }
     }
+
 }

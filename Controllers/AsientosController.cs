@@ -7,55 +7,50 @@ namespace Reto_Back.Controllers
     [ApiController]
     public class AsientoController : ControllerBase
     {
-    private static List<Sala> salas = SalaController.GetSalasList();
+        private static List<Sesion> sesiones = SesionController.GetSesionesList();
 
-       [HttpGet("{salaId}")]
-        public ActionResult<IEnumerable<Asiento>> GetAsientos(int salaId)
+        // Obtener asientos por sesión
+        [HttpGet("sesion/{sesionId}")]
+        public ActionResult<IEnumerable<Asiento>> GetAsientos(int sesionId)
         {
-        var sala = salas.FirstOrDefault(s => s.Id == salaId);
-        if (sala == null)
-        {
-            return NotFound($"Sala con ID {salaId} no encontrada.");
+            var sesion = sesiones.FirstOrDefault(s => s.Id == sesionId);
+            if (sesion == null)
+            {
+                return NotFound($"Sesión con ID {sesionId} no encontrada.");
+            }
+
+            var asientos = sesion.Asientos;
+            if (!asientos.Any())
+            {
+                return NotFound($"No hay asientos disponibles para la sesión con ID {sesionId}.");
+            }
+
+            return Ok(asientos);
         }
 
-        // buscar todos los asientos de la sesion
-        var asientos = sala.Sesion.SelectMany(s => s.Asientos).ToList();
-
-        if (!asientos.Any())
+        // Reservar asiento en una sesión específica
+        [HttpPut("sesion/{sesionId}/{fila}/{columna}/reservar")]
+        public IActionResult ReservarAsiento(int sesionId, string fila, int columna)
         {
-            return NotFound($"No hay asientos disponibles para la sala con ID {salaId}.");
+            var sesion = sesiones.FirstOrDefault(s => s.Id == sesionId);
+            if (sesion == null)
+            {
+                return NotFound($"Sesión con ID {sesionId} no encontrada.");
+            }
+
+            var asiento = sesion.Asientos.FirstOrDefault(a => a.Fila == fila && a.Columna == columna);
+            if (asiento == null)
+            {
+                return NotFound($"Asiento en la fila {fila} y columna {columna} no encontrado en la sesión {sesionId}.");
+            }
+
+            if (asiento.Ocupado)
+            {
+                return Conflict($"El asiento en la fila {fila} y columna {columna} ya está reservado.");
+            }
+
+            asiento.Ocupado = true; // Reservar el asiento
+            return Ok($"Asiento en la fila {fila} y columna {columna} reservado exitosamente en la sesión {sesionId}.");
         }
-
-        return Ok(asientos);
-        }
-
-      [HttpPut("{salaId}/{fila}/{columna}/reservar")]
-    public IActionResult ReservarAsiento(int salaId, string fila, int columna)
-        {
-        var sala = salas.FirstOrDefault(s => s.Id == salaId);
-        if (sala == null)
-        {
-            return NotFound($"Sala con ID {salaId} no encontrada.");
-        }
-
-        // buscar el asiento 
-        var asiento = sala.Sesion
-                        .SelectMany(s => s.Asientos)
-                        .FirstOrDefault(a => a.Fila == fila && a.Columna == columna);
-
-        if (asiento == null)
-        {
-            return NotFound($"Asiento en la fila {fila} y columna {columna} no encontrado en la sala {salaId}.");
-        }
-
-        if (asiento.Ocupado)
-        {
-            return Conflict($"El asiento en la fila {fila} y columna {columna} ya está reservado.");
-        }
-
-        // Reservar
-        asiento.Ocupado = true;
-        return Ok($"Asiento en la fila {fila} y columna {columna} reservado exitosamente.");
-        }   
     }
 }
