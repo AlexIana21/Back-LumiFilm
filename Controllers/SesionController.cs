@@ -27,6 +27,17 @@ namespace Reto_Back.Controllers
             return Ok(sesion);
         }
 
+        [HttpGet("pelicula/{idPelicula}")]
+        public IActionResult GetSesionByMovie(int idPelicula)
+        {
+            var sesionesFiltradas = sesiones.Where(s => s.Pelicula.Id == idPelicula).ToList();
+            if (sesionesFiltradas.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(sesionesFiltradas);
+        }
+
         [HttpPost]
         public ActionResult<Sesion> CreateSesion(Sesion sesion)
         {
