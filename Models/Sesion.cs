@@ -14,7 +14,7 @@ public class Sesion
     {
         if (capacidad > 10)
         {
-            throw new ArgumentException("La capacidad no puede exceder 10 asientos.");
+            throw new ArgumentException("La capacidad no puede exceder 9 asientos.");
         }
 
         Id = contadorId++;
@@ -27,24 +27,21 @@ public class Sesion
 
     private void GenerarAsientos(int capacidad)
     {
-        int columnas = 10; 
-        int filas = (int)Math.Ceiling((double)capacidad / columnas);
+        int columnas = 3; 
+        int filas = (int)Math.Ceiling(capacidad / (double)columnas);
 
-        for (int x = 0; x < filas; x++) 
+        for (int fila = 0; fila < filas; fila++) 
         {
-            string filaActual = ((char)('A' + x)).ToString(); 
 
-            for (int y = 1; y <= columnas; y++)
+             for (int columna = 1; columna <= columnas; columna++)
             {
-                if (Asientos.Count >= capacidad)
-                {
-                    break;
-                }
-
+                int asientoNumero = fila * columnas + columna;
+                if (asientoNumero > capacidad) break; 
+                
                 Asientos.Add(new Asiento
                 {
-                    Fila = filaActual, 
-                    Columna = columnas,
+                    Columna = columna,
+                    Fila = (char)('A' + fila),
                     Ocupado = false
                 });
             }

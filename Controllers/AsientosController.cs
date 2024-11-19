@@ -30,7 +30,7 @@ namespace Reto_Back.Controllers
 
         // Reservar asiento en una sesión específica
         [HttpPut("sesion/{sesionId}/{fila}/{columna}/reservar")]
-        public IActionResult ReservarAsiento(int sesionId, string fila, int columna)
+        public IActionResult ReservarAsiento(int sesionId, char fila, int columna)
         {
             var sesion = sesiones.FirstOrDefault(s => s.Id == sesionId);
             if (sesion == null)
