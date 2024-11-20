@@ -42,7 +42,8 @@ public class Sesion
                 {
                     Columna = columna,
                     Fila = (char)('A' + fila),
-                    Ocupado = false
+                    Ocupado = false,
+                    Precio =  7.5
                 });
             }
         }
