@@ -93,6 +93,7 @@ namespace Reto_Back.Controllers
 
             if (pelicula1 != null && sala1 != null) 
             {
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(16, 30), pelicula1, sala1, 90));
                 sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(18, 30), pelicula1, sala1, 90));
                 sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(20, 30), pelicula1, sala1, 90));
                 sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(16, 30), pelicula1, sala1, 90));
@@ -102,7 +103,6 @@ namespace Reto_Back.Controllers
                 sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(18, 30), pelicula1, sala1, 90));
                 sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(20, 30), pelicula1, sala1, 90));
                 sesiones.Add(new Sesion(new DateOnly(2024, 12, 08), new TimeOnly(16, 30), pelicula1, sala1, 90));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(16, 30), pelicula1, sala1, 90));
                 sesiones.Add(new Sesion(new DateOnly(2024, 12, 08), new TimeOnly(18, 30), pelicula1, sala1, 90));
                 sesiones.Add(new Sesion(new DateOnly(2024, 12, 08), new TimeOnly(20, 30), pelicula1, sala1, 90));
             }
