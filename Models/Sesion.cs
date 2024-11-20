@@ -12,9 +12,9 @@ public class Sesion
 
     public Sesion(DateOnly dia, TimeOnly hora, Pelicula pelicula, Sala sala, int capacidad)
     {
-        if (capacidad > 10)
+        if (capacidad > 100)
         {
-            throw new ArgumentException("La capacidad no puede exceder 9 asientos.");
+            throw new ArgumentException("La capacidad no puede exceder 100 asientos.");
         }
 
         Id = contadorId++;
@@ -27,7 +27,7 @@ public class Sesion
 
     private void GenerarAsientos(int capacidad)
     {
-        int columnas = 3; 
+        int columnas = 9; 
         int filas = (int)Math.Ceiling(capacidad / (double)columnas);
 
         for (int fila = 0; fila < filas; fila++) 
