@@ -57,7 +57,7 @@ namespace Reto_Back.Controllers
         {
             if (salas.Count == 0) 
             {
-                for (int i = 1; i <= 8; i++)
+                for (int i = 1; i <= 9; i++)
                 {
                     salas.Add(new Sala());
                     Console.WriteLine($"Sala {i} creada."); 
