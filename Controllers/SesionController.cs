@@ -281,6 +281,32 @@ namespace Reto_Back.Controllers
             {
                 Console.WriteLine("La película 'Robot Salvaje' no ha sido encontrada");
             }
+
+            //Sesiones para Minecraftt
+            var pelicula9 = peliculas.FirstOrDefault(p => p.Titulo == "Robot Salvaje");
+            var sala9 = salas.FirstOrDefault(p => p.Id == 9);
+            if (pelicula9 != null && sala9!= null)
+            {
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(16, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(20, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(20, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(16, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(20, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(16, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(20, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(16, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(20, 00), pelicula9, sala9, 90));
+            }
+            else
+            {
+                Console.WriteLine("La película 'Minecraft' no ha sido encontrada");
+            }
         }
 
         public static List<Sesion> GetSesionesList()
