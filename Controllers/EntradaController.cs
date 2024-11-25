@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Utils;
 
 namespace Reto_Back.Controllers
 {
@@ -28,10 +29,27 @@ namespace Reto_Back.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Pelicula> CreateEntrada(Entrada entrada)
+        public ActionResult<Entrada> CreateEntrada(Entrada entradaRequest)
         {
-           entradas.Add(entrada);
-           return CreatedAtAction(nameof(GetEntrada), new { id = entrada.Id }, entrada);
+            try
+            {
+                if (entradaRequest.Precio < 0)
+                {
+                    
+                    Logger.LogError(new ArgumentException("Error: El precio no puede ser negativo"));
+
+                    return BadRequest(new { mensaje = "Error: El precio no puede ser negativo" });
+                }
+
+                entradas.Add(entradaRequest);
+                return CreatedAtAction(nameof(GetEntrada), new { id = entradaRequest.Id }, entradaRequest);
+            }
+            catch (Exception ex)
+            {
+                //para otro error
+                Logger.LogError(ex);
+                return StatusCode(500, new { mensaje = "Se produjo un error inesperado" });
+            }
         }
 
         [HttpPut("{id}")]
