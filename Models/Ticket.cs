@@ -12,19 +12,10 @@ public class Ticket {
     public string Apellido {get; set;}
     public string Telefono {get; set;}
     public string Mail {get; set;}
-    public double Total {
-        get {
-            double totalPedido = 0;
-                foreach(var(entrada, cantidad) in entradas) {
-                    totalPedido += entrada.Precio * cantidad;
-                }
-            return totalPedido;
-        }
-    }
+    public double PrecioTotal {get; set;}
 
-    public static int TotalTickets {get; set;} = 1;
 
-    public Ticket(Pelicula pelicula, Sala sala, string nombre, string apellido, string telefono, string mail) {
+    public Ticket(Pelicula pelicula, Sala sala, string nombre, string apellido, string telefono, string mail, double precioTotal) {
         Id = contadorId++;
         Pelicula = pelicula;
         Sala = sala;
@@ -35,6 +26,6 @@ public class Ticket {
         Apellido = apellido;
         Telefono = telefono;
         Mail = mail;
-        TotalTickets++;
+        PrecioTotal = precioTotal;
     }
 }

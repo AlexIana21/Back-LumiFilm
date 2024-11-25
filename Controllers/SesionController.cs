@@ -33,10 +33,11 @@ namespace Reto_Back.Controllers
             var sesionesFiltradas = sesiones
                 .Where(s => s.Pelicula.Id == idPelicula)
                 .Select(s => new {
-                    Id = s.Id, // Asegura de incluir el ID
-                    Dia = s.Dia.ToString("yyyy-MM-dd"), // Formatea la fecha como string
-                    Hora = s.Hora.ToString("HH:mm:ss"), // Formatea la hora como string
+                    Id = s.Id, 
+                    Dia = s.Dia.ToString("yyyy-MM-dd"), 
+                    Hora = s.Hora.ToString("HH:mm:ss"), 
                     Pelicula = s.Pelicula.Titulo,
+                    Sala = s.Sala.Id,
                 })
                 .ToList();
 
