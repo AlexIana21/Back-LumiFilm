@@ -1,3 +1,5 @@
+using Utils;
+
 namespace Models;
 
 public class Sesion
@@ -12,17 +14,33 @@ public class Sesion
 
     public Sesion(DateOnly dia, TimeOnly hora, Pelicula pelicula, Sala sala, int capacidad)
     {
-        if (capacidad > 100)
+        try
         {
-            throw new ArgumentException("La capacidad no puede exceder 100 asientos.");
-        }
+            if (capacidad > 100)
+            {
+                throw new ArgumentException("La capacidad no puede exceder 100 asientos.");
+            }
 
-        Id = contadorId++;
-        Dia = dia;
-        Hora = hora;
-        Pelicula = pelicula;
-        Sala = sala;
-        GenerarAsientos(capacidad);
+            Id = contadorId++;
+            Dia = dia;
+            Hora = hora;
+            Pelicula = pelicula;
+            Sala = sala;
+            GenerarAsientos(capacidad);
+        }
+        catch (ArgumentException ex)
+        {
+            // Registrar el error
+            Logger.LogError(ex);
+
+            // Asignar valores por defecto para evitar la interrupción
+            Id = contadorId++;
+            Dia = dia;
+            Hora = hora;
+            Pelicula = pelicula;
+            Sala = sala;
+            Asientos = new List<Asiento>(); // No se generan asientos debido al error
+        }
     }
 
     private void GenerarAsientos(int capacidad)
@@ -32,8 +50,7 @@ public class Sesion
 
         for (int fila = 0; fila < filas; fila++) 
         {
-
-             for (int columna = 1; columna <= columnas; columna++)
+            for (int columna = 1; columna <= columnas; columna++)
             {
                 int asientoNumero = fila * columnas + columna;
                 if (asientoNumero > capacidad) break; 
@@ -43,10 +60,9 @@ public class Sesion
                     Columna = columna,
                     Fila = (char)('A' + fila),
                     Ocupado = false,
-                    Precio =  7.5
+                    Precio = 7.5
                 });
             }
         }
     }
-
 }

@@ -31,5 +31,5 @@
 *.db
 .vs/
 Publish/
-
+log.txt
 .fake

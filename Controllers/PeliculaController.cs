@@ -27,6 +27,17 @@ namespace Reto_Back.Controllers
             return Ok(pelicula);
         }
 
+       [HttpGet("Titulo/{nombre}")]
+        public ActionResult<Pelicula> GetPeliculaTitulo(string nombre)
+        {
+            var pelicula = peliculas.FirstOrDefault(p => p.Titulo.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+            if (pelicula == null)
+            {
+                return NotFound();
+            }
+            return Ok(pelicula);
+        }
+
         [HttpPost]
         public ActionResult<Pelicula> CreatePelicula(Pelicula pelicula)
         {
