@@ -33,11 +33,11 @@ namespace Reto_Back.Controllers
         {
             try
             {
-                // Buscar la sesión con el ID que tiene la Sesion del ticket
-                var sesion = SesionController.GetSesionesList().FirstOrDefault(s => s.Id == ticket.Sala.Id);
+                // Utilizar SesionId para obtener la sesión correcta
+                var sesion = SesionController.GetSesionesList().FirstOrDefault(s => s.Id == ticket.SesionId);
                 if (sesion == null)
                 {
-                    return NotFound($"No se encontró la sesión con ID {ticket.Sala.Id}.");
+                    return NotFound($"No se encontró la sesión con ID {ticket.SesionId}.");
                 }
 
                 // Revisar y marcar los asientos como ocupados
@@ -66,7 +66,6 @@ namespace Reto_Back.Controllers
             }
             catch (Exception ex)
             {
-                
                 Logger.LogError(ex);
                 return StatusCode(500, new { mensaje = "Hubo un error al crear el ticket." });
             }
