@@ -3,8 +3,10 @@ namespace Models;
 public class Ticket {
     private static int contadorId = 1;
     public int Id {get; private set;}
+    public Pelicula Pelicula {get; set;}
+    public Sala Sala {get; set;}
     public List<Asiento> AsientosReservados { get; set; }
-    public Sesion Sesion {get; set;}
+    public List<(Entrada entrada, int cantidad)> entradas;
     public DateTime FechaTicket {get; set;}
     public string Nombre {get; set;}
     public string Apellido {get; set;}
@@ -13,10 +15,12 @@ public class Ticket {
     public double PrecioTotal {get; set;}
 
 
-    public Ticket( Sesion sesion, string nombre, string apellido, string telefono, string mail, double precioTotal) {
+    public Ticket(Pelicula pelicula, Sala sala, string nombre, string apellido, string telefono, string mail, double precioTotal) {
         Id = contadorId++;
-        Sesion = sesion;
+        Pelicula = pelicula;
+        Sala = sala;
         AsientosReservados = new List<Asiento>();
+        entradas = new List<(Entrada entrada, int cantidad)>();
         FechaTicket = DateTime.Now;
         Nombre = nombre;
         Apellido = apellido;
@@ -24,6 +28,9 @@ public class Ticket {
         Mail = mail;
         PrecioTotal = precioTotal;
     }
+} 
+
+
+
 
     
-}

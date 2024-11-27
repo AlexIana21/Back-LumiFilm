@@ -34,10 +34,10 @@ namespace Reto_Back.Controllers
             try
             {
                 // Buscar la sesión con el ID que tiene la Sesion del ticket
-                var sesion = SesionController.GetSesionesList().FirstOrDefault(s => s.Id == ticket.Sesion.Id);
+                var sesion = SesionController.GetSesionesList().FirstOrDefault(s => s.Id == ticket.Sala.Id);
                 if (sesion == null)
                 {
-                    return NotFound($"No se encontró la sesión con ID {ticket.Sesion.Id}.");
+                    return NotFound($"No se encontró la sesión con ID {ticket.Sala.Id}.");
                 }
 
                 // Revisar y marcar los asientos como ocupados
