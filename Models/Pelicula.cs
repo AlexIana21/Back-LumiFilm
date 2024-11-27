@@ -1,8 +1,7 @@
 namespace Models;
 
 public class Pelicula {
-    private static int contadorId = 1;
-    public int Id {get; private set;}
+    public int Id {get; set;}
     public string Titulo {get;set;}
     public string Sinopsis {get;set;}
     public int Duracion {get;set;}
@@ -11,8 +10,8 @@ public class Pelicula {
     public string Direccion {get; set;}
     public string Imagen {get; set;}
 
-    public Pelicula(string titulo, string sinopsis, int duracion, int clasificacion, string genero, string direccion, string imagen) {
-        Id = contadorId++;
+    public Pelicula(int id, string titulo, string sinopsis, int duracion, int clasificacion, string genero, string direccion, string imagen) {
+        Id = id;
         Titulo = titulo;
         Sinopsis = sinopsis;
         Duracion = duracion;

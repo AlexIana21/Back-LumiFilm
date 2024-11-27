@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Utils;
 
 namespace Reto_Back.Controllers
 {
@@ -30,8 +31,45 @@ namespace Reto_Back.Controllers
         [HttpPost]
         public ActionResult<Ticket> CreateTicket(Ticket ticket)
         {
-           tickets.Add(ticket);
-           return CreatedAtAction(nameof(GetTicket), new { id = ticket.Id }, ticket);
+            try
+            {
+                // Buscar la sesión con el ID que tiene la Sesion del ticket
+                var sesion = SesionController.GetSesionesList().FirstOrDefault(s => s.Id == ticket.Sesion.Id);
+                if (sesion == null)
+                {
+                    return NotFound($"No se encontró la sesión con ID {ticket.Sesion.Id}.");
+                }
+
+                // Revisar y marcar los asientos como ocupados
+                foreach (var asientoReservado in ticket.AsientosReservados)
+                {
+                    var asientoSesion = sesion.Asientos.FirstOrDefault(a =>
+                        a.Columna == asientoReservado.Columna && a.Fila == asientoReservado.Fila);
+
+                    if (asientoSesion == null)
+                    {
+                        return BadRequest($"El asiento {asientoReservado.Fila}{asientoReservado.Columna} no existe.");
+                    }
+                    if (asientoSesion.Ocupado)
+                    {
+                        return BadRequest($"El asiento {asientoReservado.Fila}{asientoReservado.Columna} ya está ocupado.");
+                    }
+
+                    asientoSesion.Ocupado = true;
+                }
+
+                // Guardar el ticket
+                tickets.Add(ticket);
+
+                // Responder con el ticket creado
+                return Ok(ticket);
+            }
+            catch (Exception ex)
+            {
+                
+                Logger.LogError(ex);
+                return StatusCode(500, new { mensaje = "Hubo un error al crear el ticket." });
+            }
         }
 
         [HttpPut("{id}")]
@@ -42,10 +80,7 @@ namespace Reto_Back.Controllers
             {
                 return NotFound();
             }
-            ticket.Pelicula = updateTicket.Pelicula;
-            ticket.Sala = updateTicket.Sala;
             ticket.AsientosReservados = updateTicket.AsientosReservados;
-            ticket.entradas = updateTicket.entradas;
             ticket.FechaTicket = updateTicket.FechaTicket;
             return NoContent();
         }
