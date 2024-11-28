@@ -3,7 +3,9 @@ namespace Models;
 public class Ticket {
     private static int contadorId = 1;
     public int Id {get; private set;}
-    public int SesionId {get; set;}  //Pillar la id de sesion 
+    public int SesionId {get; set;}  
+    public DateOnly Fecha {get; set;}
+    public TimeOnly Hora {get; set;}
     public Pelicula Pelicula {get; set;}
     public Sala Sala {get; set;}
     public List<Asiento> AsientosReservados {get; set;}
