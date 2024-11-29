@@ -187,18 +187,18 @@ namespace Reto_Back.Controllers
             if (pelicula5 != null && sala5 != null)
             {   
 
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(16, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(18, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(20, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 05), new TimeOnly(16, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 05), new TimeOnly(18, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 05), new TimeOnly(20, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(16, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(18, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(20, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(16, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(18, 00), pelicula5, sala5, 75));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(20, 00), pelicula5, sala5, 75));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(16, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(18, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(20, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 05), new TimeOnly(16, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 05), new TimeOnly(18, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 05), new TimeOnly(20, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(16, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(18, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(20, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(16, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(18, 00), pelicula5, sala5, 70));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(20, 00), pelicula5, sala5, 70));
             }
             else
             {
@@ -288,21 +288,21 @@ namespace Reto_Back.Controllers
             var sala9 = salas.FirstOrDefault(p => p.Id == 9);
             if (pelicula9 != null && sala9!= null)
             {
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(16, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(18, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(20, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(16, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(18, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(20, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(16, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(18, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(20, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(16, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(18, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(20, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(16, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(18, 00), pelicula9, sala9, 85));
-                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(20, 00), pelicula9, sala9, 85));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(16, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 02), new TimeOnly(20, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(16, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 03), new TimeOnly(20, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(16, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 04), new TimeOnly(20, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(16, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 06), new TimeOnly(20, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(16, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(18, 00), pelicula9, sala9, 90));
+                sesiones.Add(new Sesion(new DateOnly(2024, 12, 07), new TimeOnly(20, 00), pelicula9, sala9, 90));
             }
             else
             {
