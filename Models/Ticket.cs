@@ -17,7 +17,6 @@ public class Ticket {
     public string Mail {get; set;}
     public double PrecioTotal {get; set;}
 
-
   public Ticket(Pelicula pelicula, Sala sala, string nombre, string apellido, string telefono, string mail, double precioTotal) {
         Id = contadorId++;
         Pelicula = pelicula;

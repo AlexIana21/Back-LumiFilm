@@ -28,7 +28,7 @@ namespace Reto_Back.Controllers
         }
 
        [HttpPost]
-        public ActionResult<Sala> CreateSala([FromBody] Sala sala) // Los datos de la sala se esperan en el cuerpo (body) de la solicitud
+        public ActionResult<Sala> CreateSala(Sala sala) 
         {
             if (salas.Any(s => s.Id == sala.Id))
             {

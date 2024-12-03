@@ -33,14 +33,14 @@ namespace Reto_Back.Controllers
         {
             try
             {
-                // Utilizar SesionId para obtener la sesión correcta
+                // Busca la sesión por el id
                 var sesion = SesionController.GetSesionesList().FirstOrDefault(s => s.Id == ticket.SesionId);
                 if (sesion == null)
                 {
                     return NotFound($"No se encontró la sesión con ID {ticket.SesionId}.");
                 }
 
-                // Revisar y marcar los asientos como ocupados
+                // Reserva el asiento elegido si no está ocupado y si existe
                 foreach (var asientoReservado in ticket.AsientosReservados)
                 {
                     var asientoSesion = sesion.Asientos.FirstOrDefault(a =>
@@ -58,10 +58,8 @@ namespace Reto_Back.Controllers
                     asientoSesion.Ocupado = true;
                 }
 
-                // Guardar el ticket
                 tickets.Add(ticket);
 
-                // Responder con el ticket creado
                 return Ok(ticket);
             }
             catch (Exception ex)
