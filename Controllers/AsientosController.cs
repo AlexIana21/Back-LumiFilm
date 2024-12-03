@@ -9,7 +9,7 @@ namespace Reto_Back.Controllers
     {
         private static List<Sesion> sesiones = SesionController.GetSesionesList();
 
-        // Obtener asientos por sesión
+        // Obtener asientos por id de la sesión
         [HttpGet("sesion/{sesionId}")]
         public ActionResult<IEnumerable<Asiento>> GetAsientos(int sesionId)
         {
@@ -19,7 +19,7 @@ namespace Reto_Back.Controllers
                 return NotFound($"Sesión con ID {sesionId} no encontrada.");
             }
 
-            var asientos = sesion.Asientos;
+            var asientos = sesion.Asientos; //Accede a la propiedad Asientos de la sesión encontrada.
             if (!asientos.Any())
             {
                 return NotFound($"No hay asientos disponibles para la sesión con ID {sesionId}.");

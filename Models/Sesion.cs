@@ -46,13 +46,14 @@ public class Sesion
     private void GenerarAsientos(int capacidad)
     {
         int columnas = 9; 
-        int filas = (int)Math.Ceiling(capacidad / (double)columnas);
+        int filas = (int)Math.Ceiling(capacidad / (double)columnas); //por ejemplo, si hay capacidad para 25 asientos, se necesitan 3 filas: 9+9+7).
+
 
         for (int fila = 0; fila < filas; fila++) 
         {
             for (int columna = 1; columna <= columnas; columna++)
             {
-                int asientoNumero = fila * columnas + columna;
+                int asientoNumero = fila * columnas + columna;  // Determina cuántos asientos hay en filas completas anteriores. + Agrega el asiento actual de la fila.
                 if (asientoNumero > capacidad) break; 
                 
                 Asientos.Add(new Asiento

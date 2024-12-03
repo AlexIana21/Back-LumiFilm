@@ -7,6 +7,7 @@ namespace Reto_Back.Controllers
     [ApiController]
     public class SalaController : ControllerBase
     {
+        //Almacenamos objetos de tipo Sala
         private static List<Sala> salas = new List<Sala>();
 
         [HttpGet]
@@ -27,7 +28,7 @@ namespace Reto_Back.Controllers
         }
 
        [HttpPost]
-        public ActionResult<Sala> CreateSala([FromBody] Sala sala)
+        public ActionResult<Sala> CreateSala([FromBody] Sala sala) // Los datos de la sala se esperan en el cuerpo (body) de la solicitud
         {
             if (salas.Any(s => s.Id == sala.Id))
             {
@@ -53,8 +54,10 @@ namespace Reto_Back.Controllers
             return NoContent();
         }
 
+        //Inicializar el numero de salas que va a tener nuestro cine 
         public static void InicializarDatos()    
         {
+            //Verifica si la lista salas está vacía.
             if (salas.Count == 0) 
             {
                 for (int i = 1; i <= 9; i++)
@@ -69,6 +72,7 @@ namespace Reto_Back.Controllers
             }
         }
 
+        //Devuelve la lista salas y se puede llamar fuera de la clase
         public static List<Sala> GetSalasList() 
         {
             return salas;

@@ -10,7 +10,7 @@ namespace Models
         public string Tipo { get; set; }
         public double Precio { get; set; }
 
-        public Entrada() {}
+        public Entrada() {} // Constructor vacio para el swagger 
 
         public Entrada(string tipo, double precio)
         {

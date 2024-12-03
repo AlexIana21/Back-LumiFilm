@@ -7,7 +7,8 @@ namespace Reto_Back.Controllers
     [ApiController]
     
     public class SesionController : ControllerBase 
-    {
+    {   
+        //Almacenamos objetos de tipo Sesiones
         private static List<Sesion> sesiones = new List<Sesion>();
 
         [HttpGet]
@@ -31,23 +32,23 @@ namespace Reto_Back.Controllers
         public IActionResult GetSesionByMovie(int idPelicula)
         {
             var sesionesFiltradas = sesiones
-                .Where(s => s.Pelicula.Id == idPelicula)
-                .Select(s => new {
+                .Where(s => s.Pelicula.Id == idPelicula) //Filtra la Pelicula.Id si coincide con el idPelicula recibido
+                .Select(s => new { //Proyecta los datos de las sesiones filtradas en un nuevo formato
                     Id = s.Id, 
                     Dia = s.Dia.ToString("yyyy-MM-dd"), 
                     Hora = s.Hora.ToString("HH:mm:ss"), 
                     Pelicula = s.Pelicula.Titulo,
                     Sala = s.Sala.Id,
                 })
-                .ToList();
+                .ToList(); //Convierte el resultado del filtrado y transformación en una lista
 
             if (sesionesFiltradas.Count == 0)
             {
                 return NotFound();
             }
 
-    return Ok(sesionesFiltradas);
-}
+        return Ok(sesionesFiltradas);
+        }
 
         [HttpPost]
         public ActionResult<Sesion> CreateSesion(Sesion sesion)
@@ -310,6 +311,7 @@ namespace Reto_Back.Controllers
             }
         }
 
+        //Devuelve la lista sesiones y se puede llamar fuera de la clase
         public static List<Sesion> GetSesionesList()
         {
         return sesiones;
