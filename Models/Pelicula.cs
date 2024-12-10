@@ -9,8 +9,9 @@ public class Pelicula {
     public string Genero {get;set;}
     public string Direccion {get; set;}
     public string Imagen {get; set;}
+    public bool MasVistas {get; set;}
 
-    public Pelicula(int id, string titulo, string sinopsis, int duracion, int clasificacion, string genero, string direccion, string imagen) {
+    public Pelicula(int id, string titulo, string sinopsis, int duracion, int clasificacion, string genero, string direccion, string imagen, bool masVistas) {
         Id = id;
         Titulo = titulo;
         Sinopsis = sinopsis;
@@ -19,6 +20,7 @@ public class Pelicula {
         Genero = genero;
         Direccion = direccion;
         Imagen = imagen;
+        MasVistas = masVistas;
     }
 
 }
