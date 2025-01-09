@@ -82,6 +82,39 @@ namespace Reto_Back.Controllers
             return NoContent();
         }
 
+        [HttpPost("{id}/cancelar")]
+        public IActionResult CancelarTicket(int id)
+        {
+            
+            var ticket = tickets.FirstOrDefault(t => t.Id == id);
+            if (ticket == null)
+            {
+                return NotFound(new { mensaje = $"No se encontró un ticket con ID {id}" });
+            }
+
+            
+            var sesion = SesionController.GetSesionesList().FirstOrDefault(s => s.Id == ticket.SesionId);
+            if (sesion == null)
+            {
+                return NotFound(new { mensaje = $"No se encontró una sesión asociada al ticket con ID {id}" });
+            }
+
+            
+            foreach (var asiento in ticket.AsientosReservados)
+            {
+                var asientoSesion = sesion.Asientos.FirstOrDefault(a => a.Fila == asiento.Fila && a.Columna == asiento.Columna);
+                if (asientoSesion != null)
+                {
+                    asientoSesion.Ocupado = false;
+                }
+            }
+
+            
+            tickets.Remove(ticket);
+
+            return Ok(new { mensaje = $"Los asientos del ticket con ID {id} han sido cancelados." });
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteTicket(int id)
         {
