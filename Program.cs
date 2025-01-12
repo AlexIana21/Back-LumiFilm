@@ -36,6 +36,5 @@ EntradaController.InicializarDatos();
 PeliculaController.InicializarDatos();
 SalaController.InicializarDatos();
 SesionController.InicializarDatos();
-OpinionController.InicializarDatos();
 
 app.Run();

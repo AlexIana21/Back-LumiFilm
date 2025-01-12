@@ -15,44 +15,33 @@ namespace Reto_Back.Controllers
             return Ok(opiniones);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<Opiniones> GetOpinion(int id)
+          [HttpGet("pelicula/{idPelicula}")]
+        public IActionResult GetComentariosByMovie(int idPelicula)
         {
-            var opinion = opiniones.FirstOrDefault(o => o.Id == id);
-            if (opinion == null)
+            var opinionesFiltradas = opiniones
+                .Where(s => s.PeliculaID == idPelicula) 
+                .ToList(); 
+
+            if (opinionesFiltradas.Count == 0)
             {
                 return NotFound();
             }
-            return Ok(opinion);
+
+        return Ok(opinionesFiltradas);
         }
 
         [HttpPost]
-        public ActionResult<Opiniones> CreateOpinion(int peliculaId, string texto, string username, int calificacion)
+        public ActionResult<Opiniones> CreateOpinion(Opiniones opinion)
         {
-            var pelicula = PeliculaController.GetPeliculasList().FirstOrDefault(p => p.Id == peliculaId);
+            var pelicula = PeliculaController.GetPeliculasList().FirstOrDefault(p => p.Id == opinion.PeliculaID);
             if (pelicula == null)
             {
                 return BadRequest("Película no encontrada.");
             }
 
-            var nuevaOpinion = new Opiniones(pelicula, texto, username, calificacion);
-            opiniones.Add(nuevaOpinion);
+            opiniones.Add(opinion);
 
-            return CreatedAtAction(nameof(GetOpinion), new { id = nuevaOpinion.Id }, nuevaOpinion);
-        }
-
-        public static void InicializarDatos()
-        {
-            var peliculas = PeliculaController.GetPeliculasList();
-
-            var pelicula1 = peliculas.FirstOrDefault(p => p.Id == 1);
-            var pelicula2 = peliculas.FirstOrDefault(p => p.Id == 3);
-
-            if (pelicula1 != null && pelicula2 != null)
-            {
-                opiniones.Add(new Opiniones(pelicula1, "Gran actuación y dirección.", "Usuario1", 5));
-                opiniones.Add(new Opiniones(pelicula2, "Suspenso emocionante.", "Usuario2", 4));
-            }
+            return Ok(opiniones); 
         }
     }
 }
