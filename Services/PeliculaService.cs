@@ -9,7 +9,7 @@ namespace Reto_Back.Service
     {
         private readonly IPeliculaRepository _peliculaRepository;
 
-        public PeliculaService(IPeliculaRepository peliculaRepository)
+        public PeliculaService(IPeliculaRepository peliculaRepository) 
         {
             _peliculaRepository = peliculaRepository;
         }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Reto_Back.Services;
 
 namespace Reto_Back.Controllers
 {
@@ -7,19 +8,24 @@ namespace Reto_Back.Controllers
     [ApiController]
     public class SalaController : ControllerBase
     {
-        //Almacenamos objetos de tipo Sala
-        private static List<Sala> salas = new List<Sala>();
+        private readonly ISalaService _serviceSala;
+
+        public SalaController(ISalaService serviceSala)
+        {
+            _serviceSala = serviceSala;
+        }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Sala>> GetSalas()
+        public async Task<ActionResult<List<Sala>>> GetSalas()
         {
+            var salas = await _serviceSala.GetAllAsync();
             return Ok(salas);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Sala> GetSala(int id)
+        public async Task<ActionResult<Sala>> GetSala(int id)
         {
-            var sala = salas.FirstOrDefault(s => s.Id == id);
+            var sala = await _serviceSala.GetByIdAsync(id);
             if (sala == null)
             {
                 return NotFound($"Sala con ID {id} no encontrada.");
@@ -27,57 +33,48 @@ namespace Reto_Back.Controllers
             return Ok(sala);
         }
 
-       [HttpPost]
-        public ActionResult<Sala> CreateSala(Sala sala) 
+        [HttpPost]
+        public async Task<ActionResult<Sala>> CreateSala(Sala sala)
         {
-            if (salas.Any(s => s.Id == sala.Id))
+            var existingSala = await _serviceSala.GetByIdAsync(sala.Id);
+            if (existingSala != null)
             {
                 return Conflict($"Ya existe una sala con el ID {sala.Id}.");
             }
 
-            var nuevaSala = new Sala();
-            salas.Add(nuevaSala);
+            await _serviceSala.AddAsync(sala);
+            return CreatedAtAction(nameof(GetSala), new { id = sala.Id }, sala);
+        }
 
-            return CreatedAtAction(nameof(GetSala), new { id = nuevaSala.Id }, nuevaSala);
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateSala(int id, Sala updatedSala)
+        {
+            var existingSala = await _serviceSala.GetByIdAsync(id);
+            if (existingSala == null)
+            {
+                return NotFound($"Sala con ID {id} no encontrada.");
+            }
+
+            // Actualizar la sala existente
+            existingSala.Nombre = updatedSala.Nombre;
+            existingSala.Capacidad = updatedSala.Capacidad;
+            existingSala.Disponible = updatedSala.Disponible;
+
+            await _serviceSala.UpdateAsync(existingSala);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteSala(int id)
+        public async Task<IActionResult> DeleteSala(int id)
         {
-            var sala = salas.FirstOrDefault(s => s.Id == id);
+            var sala = await _serviceSala.GetByIdAsync(id);
             if (sala == null)
             {
                 return NotFound($"Sala con ID {id} no encontrada.");
             }
 
-            salas.Remove(sala);
+            await _serviceSala.DeleteAsync(id);
             return NoContent();
         }
-
-        //Inicializar el numero de salas que va a tener nuestro cine 
-        public static void InicializarDatos()    
-        {
-            //Verifica si la lista salas está vacía.
-            if (salas.Count == 0) 
-            {
-                for (int i = 1; i <= 9; i++)
-                {
-                    salas.Add(new Sala());
-                    Console.WriteLine($"Sala {i} creada."); 
-                }
-            }
-            else
-            {
-                Console.WriteLine("Las salas ya estaban inicializadas.");
-            }
-        }
-
-        //Devuelve la lista salas y se puede llamar fuera de la clase
-        public static List<Sala> GetSalasList() 
-        {
-            return salas;
-        }
-
     }
 }
-

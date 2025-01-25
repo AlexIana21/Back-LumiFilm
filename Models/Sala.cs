@@ -2,9 +2,13 @@ namespace Models;
 
 public class Sala
 {
-    private static int counterId = 1;
     public int Id { get; set; }
+    public string Nombre { get; set; }
+    public int Capacidad { get; set; }
+    public int NFilas { get; set; }
+    public int NColumnas { get; set; }
+    public bool Disponible { get; set; }
+    
     public Sala() {
-        Id = counterId++;
     }
 }

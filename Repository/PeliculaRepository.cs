@@ -143,8 +143,5 @@ namespace Reto_Back.Repositories
         }
     }
 
-    public interface IPeliculaRepoitory
-    {
-        Task<List<Pelicula>> GetAllAsync();
-    }
+    public interface IPeliculaRepoitory {}
 }

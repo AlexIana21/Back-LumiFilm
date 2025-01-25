@@ -1,21 +1,20 @@
 using Models;
 using MySql.Data.MySqlClient;
 
-
 namespace Reto_Back.Repositories
 {
-    public class ComentarioRepository : IComentarioRepository
+    public class SalaRepoitory : ISalaRepoitory
     { 
         private readonly string _connectionString;
 
-        public ComentarioRepository(string connectionString)
+        public SalaRepoitory(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public async Task<List<Comentario>> GetAllAsync()
+        public async Task<List<Sala>> GetAllAsync()
         {
-            var comentarios = new List<Comentario>();
+            var salas = new List<Sala>();
             using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -27,25 +26,25 @@ namespace Reto_Back.Repositories
                     {
                         while (await reader.ReadAsync())
                         {
-                            var comentario = new Comentario
+                            var sala = new Sala
                             {
                                 Id = reader.GetInt32(0),
-                                Texto = reader.GetString(1),
-                                Fecha = reader.GetDateTime(2),
-                                UsuarioId = reader.GetInt32(3),
-                                Puntuacion = reader.GetInt32(4),
-                                PeliculaId = reader.GetInt32(5)
+                                Nombre = reader.GetString(1),
+                                Capacidad = reader.GetInt32(2),
+                                NFilas = reader.GetInt32(3),
+                                NColumnas = reader.GetInt32(4),
+                                Disponible = reader.GetBoolean(5),
                             }; 
 
-                            comentarios.Add(comentario);
+                            salas.Add(sala);
                         }
                     }
                 }
             }
-            return comentarios;
+            return salas;
         }
 
-        public async Task AddAsync(Comentario comentario)
+        public async Task AddAsync(Sala sala)
         {
             using (var connection = new MySqlConnection (_connectionString))
             {
@@ -53,11 +52,11 @@ namespace Reto_Back.Repositories
 
                 string query = "";
                 using (var command = new MySqlCommand(query, connection)){
-                    command.Parameters.AddWithValue("@Texto", comentario.Texto);
-                    command.Parameters.AddWithValue("@Fecha", comentario.Fecha);
-                    command.Parameters.AddWithValue("@UsuarioId", comentario.UsuarioId);
-                    command.Parameters.AddWithValue("@Puntuacion", comentario.Puntuacion);
-                    command.Parameters.AddWithValue("@PeliculaId", comentario.PeliculaId);
+                    command.Parameters.AddWithValue("@Nombre", sala.Nombre);
+                    command.Parameters.AddWithValue("@Capacidad", sala.Capacidad);
+                    command.Parameters.AddWithValue("@NFilas", sala.NFilas);
+                    command.Parameters.AddWithValue("@NColumnas", sala.NColumnas);
+                    command.Parameters.AddWithValue("@Disponible", sala.Disponible);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -81,9 +80,9 @@ namespace Reto_Back.Repositories
             }
         }
 
-        public async Task<Comentario?> GetByIdAsync(int id)
+        public async Task<Sala?> GetByIdAsync(int id)
         {
-            Comentario comentario = null;
+            Sala sala = null;
 
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -98,23 +97,23 @@ namespace Reto_Back.Repositories
                     {
                         if (await reader.ReadAsync())
                         {
-                            comentario = new Comentario
+                            sala = new Sala
                             {
                                 Id = reader.GetInt32(0),
-                                Texto = reader.GetString(1),
-                                Fecha = reader.GetDateTime(2),
-                                UsuarioId = reader.GetInt32(3),
-                                Puntuacion = reader.GetInt32(4),
-                                PeliculaId = reader.GetInt32(5)
+                                Nombre = reader.GetString(1),
+                                Capacidad = reader.GetInt32(2),
+                                NFilas = reader.GetInt32(3),
+                                NColumnas = reader.GetInt32(4),
+                                Disponible = reader.GetBoolean(5),
                             }; 
                         }
                     }
                 }
             }
-            return comentario;
+            return sala;
         }
 
-        public async Task UpdateAsync(Comentario comentario)
+        public async Task UpdateAsync(Sala sala)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -123,11 +122,12 @@ namespace Reto_Back.Repositories
                 string query = "";
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Texto", comentario.Texto);
-                    command.Parameters.AddWithValue("@Fecha", comentario.Fecha);
-                    command.Parameters.AddWithValue("@UsuarioId", comentario.UsuarioId);
-                    command.Parameters.AddWithValue("@Puntuacion", comentario.Puntuacion);
-                    command.Parameters.AddWithValue("@PeliculaId", comentario.PeliculaId);
+                    command.Parameters.AddWithValue("@Nombre", sala.Nombre);
+                    command.Parameters.AddWithValue("@Capacidad", sala.Capacidad);
+                    command.Parameters.AddWithValue("@NFilas", sala.NFilas);
+                    command.Parameters.AddWithValue("@NColumnas", sala.NColumnas);
+                    command.Parameters.AddWithValue("@Disponible", sala.Disponible);
+
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -135,5 +135,6 @@ namespace Reto_Back.Repositories
         }
     }
 
-   
+    public interface ISalaRepoitory {}
+
 }
