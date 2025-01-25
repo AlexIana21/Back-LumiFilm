@@ -21,4 +21,8 @@ public class Pelicula {
         Imagen = imagen;
     }
 
+    public Pelicula (){
+        
+    }
+
 }

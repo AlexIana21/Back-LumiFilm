@@ -1,16 +1,14 @@
 namespace Models;
 
-public class Opiniones
+public class Comentario
 {
-    private static int contadorId = 1;
-    public int Id { get; private set; }
-    public int PeliculaID { get; set; }
-    public string Username { get; set; }
-    public DateTime FechaComentario {get;set;}
+    public int Id { get;  set; }
     public string Texto { get; set; }
-    public int Calificacion { get; set; }
+    public DateTime Fecha {get;set;}
+    public int UsuarioId { get; set; }
+    public int Puntuacion { get; set; }
+    public int PeliculaId { get; set; }
 
-    public Opiniones(){
-        Id = contadorId++;
+    public Comentario(){
     }
 }
