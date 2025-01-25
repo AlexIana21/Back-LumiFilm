@@ -14,6 +14,14 @@ new PeliculaRepoitory(connectionString));
 builder.Services.AddScoped<IComentarioRepository, ComentarioRepository>(provider =>
 new ComentarioRepository(connectionString));
 
+builder.Services.AddScoped<ISalaRepository, SalaRepoitory>(provider =>
+new SalaRepoitory(connectionString));
+
+builder.Services.AddScoped<ITicketRepository, TicketRepository>(provider =>
+new TicketRepository(connectionString));
+
+
+
 
 
 // Add services to the container.
@@ -26,6 +34,8 @@ builder.Services.AddSwaggerGen();
 // Add services 
 builder.Services.AddScoped<IPeliculaService, PeliculaService>();
 builder.Services.AddScoped<IComentarioService, ComentarioService>();
+builder.Services.AddScoped<ISalaService, SalaService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
 
 var app = builder.Build();
 

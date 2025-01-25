@@ -1,131 +1,97 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Utils;
+using Reto_Back.Services;
 
 namespace Reto_Back.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
-    public class TicketController : ControllerBase 
+    public class TicketController : ControllerBase
     {
-        private static List<Ticket> tickets = new List<Ticket>();
+        private readonly ITicketService _serviceTicket;
+
+        public TicketController(ITicketService serviceTicket)
+        {
+            _serviceTicket = serviceTicket;
+        }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Ticket>> GetTicket()
+        public async Task<ActionResult<List<Ticket>>> GetTickets()
         {
-           return Ok(tickets);
+            var tickets = await _serviceTicket.GetAllAsync();
+            return Ok(tickets);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Ticket> GetTicket(int id)
+        public async Task<ActionResult<Ticket>> GetTicket(int id)
         {
-            var ticket = tickets.FirstOrDefault(p => p.Id == id);
+            var ticket = await _serviceTicket.GetByIdAsync(id);
             if (ticket == null)
             {
-                return NotFound();
+                return NotFound($"Ticket con ID {id} no encontrado.");
             }
             return Ok(ticket);
         }
 
         [HttpPost]
-        public ActionResult<Ticket> CreateTicket(Ticket ticket)
+        public async Task<ActionResult<Ticket>> CreateTicket(Ticket ticket)
         {
             try
             {
-                // Busca la sesión por el id
-                var sesion = SesionController.GetSesionesList().FirstOrDefault(s => s.Id == ticket.SesionId);
-                if (sesion == null)
+                var result = await _serviceTicket.CreateTicketAsync(ticket);
+                if (result == null)
                 {
-                    return NotFound($"No se encontró la sesión con ID {ticket.SesionId}.");
+                    return BadRequest("No se pudo crear el ticket. Verifica los datos.");
                 }
-
-                // Reserva el asiento elegido si no está ocupado y si existe
-                foreach (var asientoReservado in ticket.AsientosReservados)
-                {
-                    var asientoSesion = sesion.Asientos.FirstOrDefault(a =>
-                        a.Columna == asientoReservado.Columna && a.Fila == asientoReservado.Fila);
-
-                    if (asientoSesion == null)
-                    {
-                        return BadRequest($"El asiento {asientoReservado.Fila}{asientoReservado.Columna} no existe.");
-                    }
-                    if (asientoSesion.Ocupado)
-                    {
-                        return BadRequest($"El asiento {asientoReservado.Fila}{asientoReservado.Columna} ya está ocupado.");
-                    }
-
-                    asientoSesion.Ocupado = true;
-                }
-
-                tickets.Add(ticket);
-
-                return Ok(ticket);
+                return CreatedAtAction(nameof(GetTicket), new { id = result.Id }, result);
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex);
-                return StatusCode(500, new { mensaje = "Hubo un error al crear el ticket." });
+                // Registra el error y responde con un código 500
+                return StatusCode(500, new { mensaje = "Hubo un error al crear el ticket.", error = ex.Message });
             }
         }
 
-
         [HttpPost("{id}/cancelar")]
-        public IActionResult CancelarTicket(int id)
+        public async Task<IActionResult> CancelarTicket(int id)
         {
-
-            var ticket = tickets.FirstOrDefault(p => p.Id == id);
+            var ticket = await _serviceTicket.GetByIdAsync(id);
             if (ticket == null)
             {
-                return NotFound();
+                return NotFound($"Ticket con ID {id} no encontrado.");
             }
 
-            // Busca la sesión por el id
-            var sesion = SesionController.GetSesionesList().FirstOrDefault(s => s.Id == ticket.SesionId);
-            if (sesion == null)
+            var result = await _serviceTicket.CancelTicketAsync(id);
+            if (!result)
             {
-                return NotFound($"No se encontró la sesión con ID {ticket.SesionId}.");
+                return BadRequest("No se pudo cancelar el ticket. Verifica los datos.");
             }
-
-            // Reserva el asiento elegido si no está ocupado y si existe
-            foreach (var asientoReservado in ticket.AsientosReservados)
-            {
-                var asientoSesion = sesion.Asientos.FirstOrDefault(a =>
-                    a.Columna == asientoReservado.Columna && a.Fila == asientoReservado.Fila);
-
-                if (asientoSesion == null)
-                {
-                   asientoSesion.Ocupado = false;
-                }
-            }
-
-            tickets.Remove(ticket);
-
-            return Ok(ticket);
+            return NoContent();
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateTicket(int id, Ticket updateTicket)
+        public async Task<IActionResult> UpdateTicket(int id, Ticket updatedTicket)
         {
-            var ticket = tickets.FirstOrDefault(p => p.Id == id);
-            if (ticket == null)
+            var existingTicket = await _serviceTicket.GetByIdAsync(id);
+            if (existingTicket == null)
             {
-                return NotFound();
+                return NotFound($"Ticket con ID {id} no encontrado.");
             }
-            ticket.AsientosReservados = updateTicket.AsientosReservados;
-            ticket.FechaTicket = updateTicket.FechaTicket;
+
+            await _serviceTicket.UpdateAsync(id, updatedTicket);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteTicket(int id)
+        public async Task<IActionResult> DeleteTicket(int id)
         {
-            var ticket = tickets.FirstOrDefault(p => p.Id == id);
+            var ticket = await _serviceTicket.GetByIdAsync(id);
             if (ticket == null)
             {
-                return NotFound();
+                return NotFound($"Ticket con ID {id} no encontrado.");
             }
-            tickets.Remove(ticket);
+
+            await _serviceTicket.DeleteAsync(id);
             return NoContent();
         }
     }

@@ -3,18 +3,18 @@ using MySql.Data.MySqlClient;
 
 namespace Reto_Back.Repositories
 {
-    public class SalaRepoitory : ISalaRepository
-{
-    private readonly string _connectionString;
+    public class TicketRepository : ITicketRepository
+    { 
+        private readonly string _connectionString;
 
-    public SalaRepoitory(string connectionString)
-    {
-        _connectionString = connectionString;
-    }
-
-        public async Task<List<Sala>> GetAllAsync()
+        public TicketRepository(string connectionString)
         {
-            var salas = new List<Sala>();
+            _connectionString = connectionString;
+        }
+
+        public async Task<List<Ticket>> GetAllAsync()
+        {
+            var tickets = new List<Ticket>();
             using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -26,25 +26,24 @@ namespace Reto_Back.Repositories
                     {
                         while (await reader.ReadAsync())
                         {
-                            var sala = new Sala
+                            var ticket = new Ticket
                             {
                                 Id = reader.GetInt32(0),
-                                Nombre = reader.GetString(1),
-                                Capacidad = reader.GetInt32(2),
-                                NFilas = reader.GetInt32(3),
-                                NColumnas = reader.GetInt32(4),
-                                Disponible = reader.GetBoolean(5),
+                                UsuarioId = reader.GetInt32(1),
+                                SesionId = reader.GetInt32(2),
+                                Asiento = reader.GetInt32(3),
+                                PrecioFinal = reader.GetDouble(4)
                             }; 
 
-                            salas.Add(sala);
+                            tickets.Add(ticket);
                         }
                     }
                 }
             }
-            return salas;
+            return tickets;
         }
 
-        public async Task AddAsync(Sala sala)
+        public async Task AddAsync(Ticket ticket)
         {
             using (var connection = new MySqlConnection (_connectionString))
             {
@@ -52,11 +51,10 @@ namespace Reto_Back.Repositories
 
                 string query = "";
                 using (var command = new MySqlCommand(query, connection)){
-                    command.Parameters.AddWithValue("@Nombre", sala.Nombre);
-                    command.Parameters.AddWithValue("@Capacidad", sala.Capacidad);
-                    command.Parameters.AddWithValue("@NFilas", sala.NFilas);
-                    command.Parameters.AddWithValue("@NColumnas", sala.NColumnas);
-                    command.Parameters.AddWithValue("@Disponible", sala.Disponible);
+                    command.Parameters.AddWithValue("@UsuarioId", ticket.UsuarioId);
+                    command.Parameters.AddWithValue("@SesionId", ticket.SesionId);
+                    command.Parameters.AddWithValue("@Asiento", ticket.Asiento);
+                    command.Parameters.AddWithValue("@PrecioFinal", ticket.PrecioFinal);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -80,9 +78,9 @@ namespace Reto_Back.Repositories
             }
         }
 
-        public async Task<Sala?> GetByIdAsync(int id)
+        public async Task<Ticket?> GetByIdAsync(int id)
         {
-            Sala sala = null;
+            Ticket ticket = null;
 
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -97,23 +95,22 @@ namespace Reto_Back.Repositories
                     {
                         if (await reader.ReadAsync())
                         {
-                            sala = new Sala
+                            ticket = new Ticket
                             {
-                                Id = reader.GetInt32(0),
-                                Nombre = reader.GetString(1),
-                                Capacidad = reader.GetInt32(2),
-                                NFilas = reader.GetInt32(3),
-                                NColumnas = reader.GetInt32(4),
-                                Disponible = reader.GetBoolean(5),
+                            Id = reader.GetInt32(0),
+                                UsuarioId = reader.GetInt32(1),
+                                SesionId = reader.GetInt32(2),
+                                Asiento = reader.GetInt32(3),
+                                PrecioFinal = reader.GetDouble(4)
                             }; 
                         }
                     }
                 }
             }
-            return sala;
+            return ticket;
         }
 
-        public async Task UpdateAsync(Sala sala)
+        public async Task UpdateAsync(Ticket ticket)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -122,11 +119,10 @@ namespace Reto_Back.Repositories
                 string query = "";
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Nombre", sala.Nombre);
-                    command.Parameters.AddWithValue("@Capacidad", sala.Capacidad);
-                    command.Parameters.AddWithValue("@NFilas", sala.NFilas);
-                    command.Parameters.AddWithValue("@NColumnas", sala.NColumnas);
-                    command.Parameters.AddWithValue("@Disponible", sala.Disponible);
+                    command.Parameters.AddWithValue("@UsuarioId", ticket.UsuarioId);
+                    command.Parameters.AddWithValue("@SesionId", ticket.SesionId);
+                    command.Parameters.AddWithValue("@Asiento", ticket.Asiento);
+                    command.Parameters.AddWithValue("@PrecioFinal", ticket.PrecioFinal);
 
 
                     await command.ExecuteNonQueryAsync();
@@ -135,6 +131,5 @@ namespace Reto_Back.Repositories
         }
     }
 
-    public interface ISalaRepoitory {}
-
+    public interface ITicketRepoitory {}
 }
