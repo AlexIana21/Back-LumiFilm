@@ -4,66 +4,12 @@ namespace Models;
 
 public class Sesion
 {
-    private static int contadorId = 1;
-    public int Id { get; private set; }
+    public int Id { get; set; }
     public DateOnly Dia { get; set; } 
     public TimeOnly Hora { get; set; }
-    public Pelicula Pelicula { get; set; } 
-    public Sala Sala { get; set; }
-    public List<Asiento> Asientos { get; set; } = new List<Asiento>();
+    public int PeliculaId{ get; set; } 
+    public int SalaId { get; set; }
+   
+    public Sesion() { }
 
-    public Sesion(DateOnly dia, TimeOnly hora, Pelicula pelicula, Sala sala, int capacidad)
-    {
-        try
-        {
-            if (capacidad > 100)
-            {
-                throw new ArgumentException("La capacidad no puede exceder 100 asientos.");
-            }
-
-            Id = contadorId++;
-            Dia = dia;
-            Hora = hora;
-            Pelicula = pelicula;
-            Sala = sala;
-            GenerarAsientos(capacidad);
-        }
-        catch (ArgumentException ex)
-        {
-            // Registrar el error
-            Logger.LogError(ex);
-
-            // Asignar valores por defecto para evitar la interrupción
-            Id = contadorId++;
-            Dia = dia;
-            Hora = hora;
-            Pelicula = pelicula;
-            Sala = sala;
-            Asientos = new List<Asiento>(); // No se generan asientos debido al error
-        }
-    }
-
-    private void GenerarAsientos(int capacidad)
-    {
-        int columnas = 9; 
-        int filas = (int)Math.Ceiling(capacidad / (double)columnas); //por ejemplo, si hay capacidad para 25 asientos, se necesitan 3 filas: 9+9+7).
-
-
-        for (int fila = 0; fila < filas; fila++) 
-        {
-            for (int columna = 1; columna <= columnas; columna++)
-            {
-                int asientoNumero = fila * columnas + columna;  // Determina cuántos asientos hay en filas completas anteriores. + Agrega el asiento actual de la fila.
-                if (asientoNumero > capacidad) break; 
-                
-                Asientos.Add(new Asiento
-                {
-                    Columna = columna,
-                    Fila = (char)('A' + fila),
-                    Ocupado = false,
-                    Precio = 7.5
-                });
-            }
-        }
-    }
 }

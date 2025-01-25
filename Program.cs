@@ -20,9 +20,8 @@ new SalaRepoitory(connectionString));
 builder.Services.AddScoped<ITicketRepository, TicketRepository>(provider =>
 new TicketRepository(connectionString));
 
-
-
-
+builder.Services.AddScoped<ISesionRepository, SesionRepository>(provider =>
+new SesionRepository(connectionString));
 
 // Add services to the container.
 
@@ -36,6 +35,7 @@ builder.Services.AddScoped<IPeliculaService, PeliculaService>();
 builder.Services.AddScoped<IComentarioService, ComentarioService>();
 builder.Services.AddScoped<ISalaService, SalaService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
+builder.Services.AddScoped<ISesionService, SesionService>();
 
 var app = builder.Build();
 
