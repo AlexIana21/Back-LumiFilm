@@ -37,8 +37,8 @@ namespace Reto_Back.Service
 
         public async Task DeleteAsync(int id)
         {
-           var plato = await _salaRepository.GetByIdAsync(id);
-           if (plato == null)
+           var sala = await _salaRepository.GetByIdAsync(id);
+           if (sala == null)
            {
                //return NotFound();
            }
