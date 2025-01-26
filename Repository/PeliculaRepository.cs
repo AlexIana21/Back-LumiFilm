@@ -3,11 +3,11 @@ using MySql.Data.MySqlClient;
 
 namespace Reto_Back.Repositories
 {
-    public class PeliculaRepoitory : IPeliculaRepoitory
+    public class PeliculaRepository : IPeliculaRepository
     { 
         private readonly string _connectionString;
 
-        public PeliculaRepoitory(string connectionString)
+        public PeliculaRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -143,5 +143,4 @@ namespace Reto_Back.Repositories
         }
     }
 
-    public interface IPeliculaRepoitory {}
 }

@@ -3,11 +3,11 @@ using MySql.Data.MySqlClient;
 
 namespace Reto_Back.Repositories
 {
-    public class SalaRepoitory : ISalaRepository
+    public class SalaRepository : ISalaRepository
 {
     private readonly string _connectionString;
 
-    public SalaRepoitory(string connectionString)
+    public SalaRepository(string connectionString)
     {
         _connectionString = connectionString;
     }
@@ -135,6 +135,5 @@ namespace Reto_Back.Repositories
         }
     }
 
-    public interface ISalaRepoitory {}
 
 }
