@@ -1,8 +1,8 @@
 using Models;
 
-namespace Reto_Back.Repositories
+namespace Reto_Back.Services
 {
-    public interface IPagoRepository
+    public interface IPagoService
     {
         Task<List<Pago>> GetAllAsync();
         Task<Pago?> GetByIdAsync(int id);
