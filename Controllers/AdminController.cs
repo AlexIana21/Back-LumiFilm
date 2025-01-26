@@ -34,10 +34,10 @@ namespace Reto_Back.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Sala>> CreateSala(Admin admin)
+        public async Task<ActionResult<Admin>> CreateAdmin(Admin admin)
         {
-            var existindAdmin = await _serviceAdmin.GetByIdAsync(admin.Id);
-            if (existindAdmin != null)
+            var existingAdmin = await _serviceAdmin.GetByIdAsync(admin.Id);
+            if (existingAdmin != null)
             {
                 return Conflict($"Ya existe un admin con el ID {admin.Id}.");
             }
@@ -49,18 +49,18 @@ namespace Reto_Back.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAdmin(int id, Admin updateAdmin)
         {
-            var existindAdmin = await _serviceAdmin.GetByIdAsync(id);
-            if (existindAdmin == null)
+            var existingAdmin = await _serviceAdmin.GetByIdAsync(id);
+            if (existingAdmin == null)
             {
                 return NotFound($"Admin con ID {id} no encontrada.");
             }
             // Actualizar el admin existente
-            existindAdmin.Nombre = updateAdmin.Nombre;
-            existindAdmin.Apellido = updateAdmin.Apellido;
-            existindAdmin.Mail = updateAdmin.Mail;
-            existindAdmin.Password = updateAdmin.Password;
+            existingAdmin.Nombre = updateAdmin.Nombre;
+            existingAdmin.Apellido = updateAdmin.Apellido;
+            existingAdmin.Mail = updateAdmin.Mail;
+            existingAdmin.Password = updateAdmin.Password;
 
-            await _serviceAdmin.UpdateAsync(existindAdmin);
+            await _serviceAdmin.UpdateAsync(existingAdmin);
             return NoContent();
         }
 
