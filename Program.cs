@@ -8,20 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString(""); //Poner la nuestra que sea necesaria.
 
 
-builder.Services.AddScoped<IPeliculaRepository, PeliculaRepository>(provider =>
-new PeliculaRepository(connectionString));
+builder.Services.AddScoped<IMovieRepository, MovieRepository>(provider =>
+new MovieRepository(connectionString));
 
 builder.Services.AddScoped<IComentarioRepository, ComentarioRepository>(provider =>
 new ComentarioRepository(connectionString));
 
-builder.Services.AddScoped<ISalaRepository, SalaRepository>(provider =>
-new SalaRepository(connectionString));
+builder.Services.AddScoped<ISeatRepository, SeatRepository>(provider =>
+new SeatRepository(connectionString));
 
-builder.Services.AddScoped<ITicketRepository, TicketRepository>(provider =>
-new TicketRepository(connectionString));
-
-builder.Services.AddScoped<ISesionRepository, SesionRepository>(provider =>
-new SesionRepository(connectionString));
+builder.Services.AddScoped<IScreenRepository, ScreenRepository>(provider =>
+new ScreenRepository(connectionString));
 
 builder.Services.AddScoped<IAdminRespository, AdminRepository>(provider =>
 new AdminRepository(connectionString));
@@ -29,11 +26,12 @@ new AdminRepository(connectionString));
 builder.Services.AddScoped<IUserRepository, UserRepository>(provider =>
 new UserRepository(connectionString));
 
-builder.Services.AddScoped<IPagoRepository, PagoRepository>(provider =>
-new PagoRepository(connectionString));
+builder.Services.AddScoped<IOrderRepository, OrderRepository>(provider =>
+new OrderRepository(connectionString));
 
-builder.Services.AddScoped<IAsientoRepository, AsientoRepository>(provider =>
-new AsientoRepository(connectionString));
+builder.Services.AddScoped<ISessionRepository, SessionRepository>(provider =>
+new SessionRepository(connectionString));
+
 
 // Add services to the container.
 
@@ -43,15 +41,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add services 
-builder.Services.AddScoped<IPeliculaService, PeliculaService>();
+builder.Services.AddScoped<IMovieService, MovieService>();    
 builder.Services.AddScoped<IComentarioService, ComentarioService>();
-builder.Services.AddScoped<ISalaService, SalaService>();
-builder.Services.AddScoped<ITicketService, TicketService>();
-builder.Services.AddScoped<ISesionService, SesionService>();
+builder.Services.AddScoped<IScreenService, ScreenService>();
+builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IPagoService, PagoService>();
-builder.Services.AddScoped<IAsientoService, AsientoService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<ISeatService, SeatService>();
 
 var app = builder.Build();
 
