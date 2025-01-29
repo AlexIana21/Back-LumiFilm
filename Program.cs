@@ -11,17 +11,14 @@ var connectionString = builder.Configuration.GetConnectionString(""); //Poner la
 builder.Services.AddScoped<IMovieRepository, MovieRepository>(provider =>
 new MovieRepository(connectionString));
 
-builder.Services.AddScoped<IComentarioRepository, ComentarioRepository>(provider =>
-new ComentarioRepository(connectionString));
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>(provider =>
+new ReviewRepository(connectionString));
 
 builder.Services.AddScoped<ISeatRepository, SeatRepository>(provider =>
 new SeatRepository(connectionString));
 
 builder.Services.AddScoped<IScreenRepository, ScreenRepository>(provider =>
 new ScreenRepository(connectionString));
-
-builder.Services.AddScoped<IAdminRespository, AdminRepository>(provider =>
-new AdminRepository(connectionString));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>(provider =>
 new UserRepository(connectionString));
@@ -42,10 +39,9 @@ builder.Services.AddSwaggerGen();
 
 // Add services 
 builder.Services.AddScoped<IMovieService, MovieService>();    
-builder.Services.AddScoped<IComentarioService, ComentarioService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IScreenService, ScreenService>();
 builder.Services.AddScoped<ISessionService, SessionService>();
-builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<ISeatService, SeatService>();

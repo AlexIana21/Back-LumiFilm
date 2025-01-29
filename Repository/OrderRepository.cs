@@ -30,7 +30,7 @@ namespace Reto_Back.Repositories
                     var order = new Order
                     {
                         Id = reader.GetInt32(0),
-                        PaymentStripeId = reader.GetString(1),
+                        StripeId = reader.GetString(1),
                         Price = reader.GetDouble(2),
                         Status = Enum.Parse<Order.OrderStatus>(reader.GetString(3)),
                         Date = reader.GetDateTime(4),
@@ -55,7 +55,7 @@ namespace Reto_Back.Repositories
                 string query = "";
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@PaymentStripeId", order.PaymentStripeId);
+                    command.Parameters.AddWithValue("@StripeId", order.StripeId);
                     command.Parameters.AddWithValue("@Price", order.Price);
                     command.Parameters.AddWithValue("@Status", order.Status);
                     command.Parameters.AddWithValue("@Date", order.Date);
@@ -86,7 +86,7 @@ namespace Reto_Back.Repositories
                             order = new Order
                             {
                                 Id = reader.GetInt32(0),
-                                PaymentStripeId = reader.GetString(1),
+                                StripeId = reader.GetString(1),
                                 Price = reader.GetDouble(2),
                                 Status = Enum.Parse<Order.OrderStatus>(reader.GetString(3)), 
                                 Date = reader.GetDateTime(4),

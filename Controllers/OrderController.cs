@@ -28,7 +28,7 @@ namespace Reto_Back.Controllers
             var order = await _serviceOrder.GetByIdAsync(id);
             if (order == null)
             {
-                return NotFound($"Pago con ID {id} no encontrado.");
+                return NotFound($"Pedido con ID {id} no encontrado.");
             }
             return Ok(order);
         }
@@ -39,7 +39,7 @@ namespace Reto_Back.Controllers
             var existingOrder = await _serviceOrder.GetByIdAsync(order.Id);
             if (existingOrder != null)
             {
-                return Conflict($"Ya existe un pago con el ID {order.Id}.");
+                return Conflict($"Ya existe un pedido con el ID {order.Id}.");
             }
 
             await _serviceOrder.AddAsync(order);

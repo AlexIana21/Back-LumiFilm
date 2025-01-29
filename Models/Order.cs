@@ -3,7 +3,7 @@ namespace Models;
 public class Order
 {
   public int Id { get; set; }
-  public string PaymentStripeId { get; set; }
+  public string StripeId { get; set; }
   public double Price{ get; set; }
   public  OrderStatus Status { get; set; }
   public DateTime Date { get; set; }
