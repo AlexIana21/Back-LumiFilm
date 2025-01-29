@@ -12,5 +12,5 @@ public class Order
 
   public Order() { }
 
-  public enum OrderStatus {Pendiente, Aprobado, Rechazado }
+  public enum OrderStatus { Pending, Processing, Completed, Declined }
   }

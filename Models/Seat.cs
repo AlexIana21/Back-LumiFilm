@@ -7,10 +7,9 @@ public class Seat
     public double Price { get; set; }
     public SeatType Type { get; set; }  
     public int ScreenId { get; set; }
-
     public Seat() { }
 
-    public enum SeatType { Normal, VIP, Minusvalidos }
+    public enum SeatType { Standard, VIP }
 }
 
 
