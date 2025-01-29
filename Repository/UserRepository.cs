@@ -30,11 +30,9 @@ namespace Reto_Back.Repositories
                             var user = new User
                             {
                                 Id = reader.GetInt32(0),
-                                Nombre = reader.GetString(1),
-                                Apellido = reader.GetString(2),
-                                Telefono = reader.GetString(3),
-                                Mail = reader.GetString(4),
-                                Password = reader.GetString(5)
+                                Email = reader.GetString(1),
+                                Password = reader.GetString(2),
+                                Role = Enum.Parse<User.UserRole>(reader.GetString(3)),
                             };
                             users.Add(user);
                         }
@@ -52,11 +50,9 @@ namespace Reto_Back.Repositories
 
                 string query = "";
                 using (var command = new MySqlCommand(query, connection)){
-                    command.Parameters.AddWithValue("@Nombre", user.Nombre);
-                    command.Parameters.AddWithValue("@Apellido", user.Apellido);
-                    command.Parameters.AddWithValue("@Telefono", user.Telefono);
-                    command.Parameters.AddWithValue("@Mail", user.Mail);
+                    command.Parameters.AddWithValue("@Email", user.Email);
                     command.Parameters.AddWithValue("@Password", user.Password);
+                    command.Parameters.AddWithValue("@Role", user.Role);
                     await command.ExecuteNonQueryAsync();
                 }
             }
@@ -98,11 +94,9 @@ namespace Reto_Back.Repositories
                             user = new User
                             {
                                 Id = reader.GetInt32(0),
-                                Nombre = reader.GetString(1),
-                                Apellido = reader.GetString(2),
-                                Telefono = reader.GetString(3),
-                                Mail = reader.GetString(4),
-                                Password = reader.GetString(5)
+                                Email = reader.GetString(1),
+                                Password = reader.GetString(2),
+                                Role = Enum.Parse<User.UserRole>(reader.GetString(3)),
                             };
                         }
                     }
@@ -120,11 +114,9 @@ namespace Reto_Back.Repositories
                 string query = "";
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Nombre", user.Nombre);
-                    command.Parameters.AddWithValue("@Apellido", user.Apellido);
-                    command.Parameters.AddWithValue("@Telefono", user.Telefono);
-                    command.Parameters.AddWithValue("@Mail", user.Mail);
+                    command.Parameters.AddWithValue("@Email", user.Email);
                     command.Parameters.AddWithValue("@Password", user.Password);
+                    command.Parameters.AddWithValue("@Role", user.Role);
 
                     await command.ExecuteNonQueryAsync();
                 }

@@ -55,11 +55,10 @@ namespace Reto_Back.Controllers
                 return NotFound($"User con ID {id} no encontrada.");
             }
             // Actualizar el user existente
-            existingUser.Nombre = updateUser.Nombre;
-            existingUser.Apellido = updateUser.Apellido;
-            existingUser.Telefono = updateUser.Telefono;
-            existingUser.Mail = updateUser.Mail;
+            existingUser.Email = updateUser.Email;
             existingUser.Password = updateUser.Password;
+            existingUser.Role = updateUser.Role;
+
 
             await _serviceUser.UpdateAsync(existingUser);
             return NoContent();

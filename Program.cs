@@ -3,6 +3,7 @@ using Reto_Back.Controllers;
 using Reto_Back.Repositories;
 using Reto_Back.Service;
 using Reto_Back.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString(""); //Poner la nuestra que sea necesaria.
@@ -31,14 +32,18 @@ new SessionRepository(connectionString));
 
 
 // Add services to the container.
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add services 
-builder.Services.AddScoped<IMovieService, MovieService>();    
+builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IScreenService, ScreenService>();
 builder.Services.AddScoped<ISessionService, SessionService>();
@@ -48,7 +53,7 @@ builder.Services.AddScoped<ISeatService, SeatService>();
 
 var app = builder.Build();
 
-app.UseCors(configurePolicy: policy => 
+app.UseCors(configurePolicy: policy =>
 {
     // policy.WithOrigins("*","https://localhost","http://localhost");
     policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();

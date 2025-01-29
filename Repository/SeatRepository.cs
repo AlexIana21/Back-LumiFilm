@@ -30,7 +30,7 @@ namespace Reto_Back.Repositories
                             var seat = new Seat
                             {
                                 Id = reader.GetInt32(0),
-                                Status = reader.GetString(1),
+                                Status = Enum.Parse<Seat.SeatStatus>(reader.GetString(3)), 
                                 Price = reader.GetDouble(2),
                                 Type = Enum.Parse<Seat.SeatType>(reader.GetString(3)), 
                                 ScreenId = reader.GetInt32(4)
@@ -99,7 +99,7 @@ namespace Reto_Back.Repositories
                             seat = new Seat
                             {
                                 Id = reader.GetInt32(0),
-                                Status = reader.GetString(1),
+                                Status = Enum.Parse<Seat.SeatStatus>(reader.GetString(3)), 
                                 Price = reader.GetDouble(2),
                                 Type = Enum.Parse<Seat.SeatType>(reader.GetString(3)), 
                                 ScreenId = reader.GetInt32(4)
